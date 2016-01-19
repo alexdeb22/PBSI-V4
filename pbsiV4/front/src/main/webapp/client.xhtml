@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Liste des clients</title>
+</h:head>
+
+<h:body>
+	<center>
+		<h1>ProxyBank</h1>
+		<h2>Intranet</h2>
+		
+		<fieldset>
+		<legend>Liste des Clients:</legend>
+		<h:form id="form1">
+			<h:dataTable border="1" id="dataClient" var="client"
+				value="#{ClientBean.getClientList()}"
+				selection="#{ClientBean.selectedClient}" selectionMode="single"
+				rowKey="#{client.id}" first="#{client.id}" paginator="false">
+				<h:column headerText="Identifiant">
+					<f:facet name="header">Identifiant</f:facet>    				
+            		#{client.id}
+				</h:column>
+				<h:column headerText="Nom">
+					<f:facet name="header">Nom</f:facet>    	
+					#{client.nom}"
+				</h:column>
+				<h:column headerText="Prenom">
+					<f:facet name="header">Prenom</f:facet>    	
+					#{client.prenom}"
+				</h:column>
+				<h:column headerText="Adresse">
+					<f:facet name="header">Adresse</f:facet>    	
+					#{client.adresse}
+				</h:column>
+				<h:column headerText="Ville">
+					<f:facet name="header">Ville</f:facet>    	
+					#{client.ville}"
+				</h:column>
+				<h:column headerText="Code Postal">
+					<f:facet name="header">CodePostal</f:facet>    	
+					#{client.codePostal}"
+				</h:column>
+				<h:column headerText="Telephone">
+					<f:facet name="header">Telephone</f:facet>    	
+					#{client.telephone}"
+				</h:column>
+				<h:column headerText="Email">
+					<f:facet name="header">Email</f:facet>    	
+					#{client.email}
+				</h:column>
+			</h:dataTable>
+		</h:form>
+		</fieldset>
+		
+	</center>
+</h:body>
+</html>
