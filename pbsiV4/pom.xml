@@ -17,4 +17,7 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+	<modules>
+		<module>Service</module>
+	</modules>
 </project>
