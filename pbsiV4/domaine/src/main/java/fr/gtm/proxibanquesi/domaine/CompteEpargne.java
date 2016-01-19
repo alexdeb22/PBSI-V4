@@ -1,8 +1,13 @@
 package fr.gtm.proxibanquesi.domaine;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
 /**
  * Classe représentant un compte épargne, héritant de la classe abstraite Compte, avec un taux de rémuneration déclaré à 3%.
  */
+@Entity
+@DiscriminatorValue("EPARGNE")
 public class CompteEpargne extends Compte {
 
 	// Propriétés
