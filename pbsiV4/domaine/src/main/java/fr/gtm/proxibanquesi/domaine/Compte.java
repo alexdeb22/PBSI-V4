@@ -2,13 +2,22 @@ package fr.gtm.proxibanquesi.domaine;
 
 import java.util.Date;
 
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+
+import org.springframework.stereotype.Component;
 
 /**
  * Classe abstraite représentant un compte en banque générique.
  */
+@Entity
+@Component
+@Inheritance
+@DiscriminatorColumn(name="TYPE_COMPTE")
 public abstract class Compte {
 
 	// Propriétés

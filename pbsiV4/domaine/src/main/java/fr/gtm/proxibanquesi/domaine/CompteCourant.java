@@ -1,8 +1,13 @@
 package fr.gtm.proxibanquesi.domaine;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
 /**
  * Classe représentant un compte courant, héritant de la classe abstraite Compte, avec autorisation de découvert déclarée de 1000 euro.
  */
+@Entity
+@DiscriminatorValue("COURANT")
 public class CompteCourant extends Compte {
 
 	// Propriétés
