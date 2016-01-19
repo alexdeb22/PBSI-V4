@@ -79,66 +79,146 @@ public class Client {
 	}
 
 	// Getters & Setters
+	/**
+	 * Getter de la propriété nom
+	 * 
+	 * @return La propriété nom
+	 */
 	public String getNom() {
 		return this.nom;
 	}
 
+	/**
+	 * Setter de la propriété nom
+	 * 
+	 * @return void
+	 */
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
 
+	/**
+	 * Getter de la propriété prenom
+	 * 
+	 * @return La propriété prenom
+	 */
 	public String getPrenom() {
 		return this.prenom;
 	}
 
+	/**
+	 * Setter de la propriété prenom
+	 * 
+	 * @return void
+	 */
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
 
+	/**
+	 * Getter de la propriété adresse
+	 * 
+	 * @return La propriété adresse
+	 */
 	public String getAdresse() {
 		return this.adresse;
 	}
 
+	/**
+	 * Setter de la propriété adresse
+	 * 
+	 * @return void
+	 */
 	public void setAdresse(String adresse) {
 		this.adresse = adresse;
 	}
 
+	/**
+	 * Getter de la propriété code postal
+	 * 
+	 * @return La propriété code postal
+	 */
 	public String getCodePostal() {
 		return this.codePostal;
 	}
 
+	/**
+	 * Setter de la propriété code postal
+	 * 
+	 * @return void
+	 */
 	public void setCodePostal(String codePostal) {
 		this.codePostal = codePostal;
 	}
 
+	/**
+	 * Getter de la propriété ville
+	 * 
+	 * @return La propriété ville
+	 */
 	public String getVille() {
 		return this.ville;
 	}
 
+	/**
+	 * Setter de la propriété ville
+	 * 
+	 * @return void
+	 */
 	public void setVille(String ville) {
 		this.ville = ville;
 	}
 
+	/**
+	 * Getter de la propriété telephone
+	 * 
+	 * @return La propriété telephone
+	 */
 	public String getTelephone() {
 		return this.telephone;
 	}
 
+	/**
+	 * Setter de la propriété telephone
+	 * 
+	 * @return void
+	 */
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
 
+	/**
+	 * Getter de la propriété id
+	 * 
+	 * @return La propriété id
+	 */
 	public Integer getId() {
 		return id;
 	}
 
+	/**
+	 * Setter de la propriété id
+	 * 
+	 * @return void
+	 */
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
+	/**
+	 * Getter de la propriété email
+	 * 
+	 * @return La propriété email
+	 */
 	public String getEmail() {
 		return email;
 	}
 
+	/**
+	 * Setter de la propriété email
+	 * 
+	 * @return void
+	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
