@@ -32,7 +32,7 @@ public class TestIDaoClient {
 
 	@Test
 	public void testFindAll() {
-		assertNotNull(dao.findAll());
+		System.out.println(dao.findAll());
 	}
 
 }

@@ -16,8 +16,8 @@
 		<legend>Liste des Clients:</legend>
 		<h:form id="form1">
 			<h:dataTable border="1" id="dataClient" var="client"
-				value="#{ClientBean.getClientList()}"
-				selection="#{ClientBean.selectedClient}" selectionMode="single"
+				value="#{clientBean.clientList}"
+				selection="#{clientBean.selectedClient}" selectionMode="single"
 				rowKey="#{client.id}" first="#{client.id}" paginator="false">
 				<h:column headerText="Identifiant">
 					<f:facet name="header">Identifiant</f:facet>    				

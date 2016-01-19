@@ -13,7 +13,7 @@ import fr.gtm.proxibanquesi.domaine.Client;
 import fr.gtm.proxibanquesi.service.IServiceClient;
 
 
-@ManagedBean(name ="ClientBean")
+//@ManagedBean(name ="ClientBean")
 @Scope
 @Component
 public class ClientBean {
@@ -24,15 +24,15 @@ public class ClientBean {
 	@Autowired
 	private IServiceClient serviceClient;
 	
-	@PostConstruct
-	public void initBean() {
-		selectedClient = null;
-		//clientList=new ArrayList<Client>();
-		//Client testc = new Client("yael", "candelier", "1 ru blabla", "etampes", "91150", "0671687609");
-		//testc.setId(1);
-		//c.add(testc);
-		
-	}
+//	@PostConstruct
+//	public void initBean() {
+//		selectedClient = null;
+//		//clientList=new ArrayList<Client>();
+//		//Client testc = new Client("yael", "candelier", "1 ru blabla", "etampes", "91150", "0671687609");
+//		//testc.setId(1);
+//		//c.add(testc);
+//		
+//	}
 	
 	public ClientBean() {
 		super();

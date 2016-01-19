@@ -22,6 +22,11 @@ public class ServiceClient implements IServiceClient {
 	@Autowired
 	private IDaoClient dao;
 
+	public ServiceClient() {
+		super();
+	}
+
+
 	/**
 	 * Methode qui retourne la liste de tous les clients
 	 */

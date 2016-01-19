@@ -19,7 +19,16 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/springContext.xml</param-value>
 	</context-param>
-	
+
+	<servlet>
+		<servlet-name>faces servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>faces servlet</servlet-name>
+		<url-pattern>/faces/*</url-pattern>
+	</servlet-mapping>
 
 </web-app>
 
