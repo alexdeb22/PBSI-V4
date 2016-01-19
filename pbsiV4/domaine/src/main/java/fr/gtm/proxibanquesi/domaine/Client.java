@@ -1,14 +1,21 @@
 package fr.gtm.proxibanquesi.domaine;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 /**
  * Classe représentant un client de la banque. Toutes les informations
  * personnelles hormis le numéro d'identification sont de type String.
  * 
  * 
  */
+@Entity
 public class Client {
 
 	/** Numéro d'identification du client. */
+	@Id
+	@GeneratedValue()
 	private Integer id;
 	/**
 	 * Nom de famille du client.

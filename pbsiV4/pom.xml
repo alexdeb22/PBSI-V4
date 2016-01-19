@@ -29,6 +29,7 @@
 	</dependencyManagement>
 	<modules>
 		<module>Service</module>
-		<module>domaine</module>
+		<module>Domaine</module>
+		<module>dao.spring-data</module>
 	</modules>
 </project>
