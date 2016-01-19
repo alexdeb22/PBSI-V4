@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import fr.gtm.proxibanquesi.dao.IDaoClient;
 import fr.gtm.proxibanquesi.domaine.Client;
 
 /**
