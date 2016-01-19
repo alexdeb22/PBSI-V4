@@ -2,6 +2,7 @@ package fr.gtm.proxibanquesi.domaine;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import org.springframework.stereotype.Component;
@@ -18,7 +19,7 @@ public class Client {
 
 	/** Numéro d'identification du client. */
 	@Id
-	@GeneratedValue()
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 	/**
 	 * Nom de famille du client.

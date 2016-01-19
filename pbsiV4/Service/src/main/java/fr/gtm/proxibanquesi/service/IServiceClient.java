@@ -2,6 +2,8 @@ package fr.gtm.proxibanquesi.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import fr.gtm.proxibanquesi.domaine.Client;
 
 /**

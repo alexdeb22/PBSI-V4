@@ -1,14 +1,16 @@
 package fr.gtm.proxibanquesi.front.beans;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import fr.gtm.proxibanquesi.domaine.Client;
+import fr.gtm.proxibanquesi.service.IServiceClient;
 
 
 @ManagedBean(name ="ClientBean")
@@ -17,10 +19,10 @@ import fr.gtm.proxibanquesi.domaine.Client;
 public class ClientBean {
 	
 	private Client selectedClient;
-	private ArrayList<Client> clientList;
+	private List<Client> clientList;
 
-	//@Autowired
-	//private IServiceClient serviceClient;
+	@Autowired
+	private IServiceClient serviceClient;
 	
 	@PostConstruct
 	public void initBean() {
@@ -44,16 +46,17 @@ public class ClientBean {
 		this.selectedClient = selectedClient;
 	}
 
-	public ArrayList<Client> getClientList() {
-		ArrayList<Client> test= new ArrayList<Client>();
-		Client testc = new Client("yael", "candelier", "1 ru blabla", "etampes", "91150", "0671687609");
-		testc.setId(1);
-		testc.setEmail("yael.candelier@gmail.com");
-		test.add(testc);
-		return test;
+	public List<Client> getClientList() {
+		clientList = serviceClient.findAll();
+//		ArrayList<Client> test= new ArrayList<Client>();
+//		Client testc = new Client("yael", "candelier", "1 ru blabla", "etampes", "91150", "0671687609");
+//		testc.setId(1);
+//		testc.setEmail("yael.candelier@gmail.com");
+//		test.add(testc);
+		return clientList;
 	}
 
-	public void setClientList(ArrayList<Client> clientList) {
+	public void setClientList(List<Client> clientList) {
 		this.clientList = clientList;
 	}
 	
