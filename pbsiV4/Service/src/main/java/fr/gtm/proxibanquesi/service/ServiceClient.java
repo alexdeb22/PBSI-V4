@@ -9,8 +9,8 @@ import fr.gtm.proxibanquesi.dao.IDaoClient;
 import fr.gtm.proxibanquesi.domaine.Client;
 
 /**
- * Classe ServiceClient. Elle implemente IServiceClient
- * Elle implemente les méthodes CRUD d'un client et une méthode qui retourne la liste de tous les clients
+ * Classe ServiceClient. Elle implémente IServiceClient
+ * Elle implémente les méthodes CRUD d'un client et une méthode qui retourne la liste de tous les clients
  *
  */
 @Service("serviceClient")
