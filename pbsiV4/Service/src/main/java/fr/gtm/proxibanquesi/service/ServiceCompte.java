@@ -3,6 +3,7 @@ package fr.gtm.proxibanquesi.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import fr.gtm.proxibanquesi.dao.IDaoCompte;
 import fr.gtm.proxibanquesi.domaine.Compte;
 
 /**
