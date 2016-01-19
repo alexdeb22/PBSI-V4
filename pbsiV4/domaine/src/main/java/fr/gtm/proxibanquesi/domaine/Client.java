@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import org.springframework.stereotype.Component;
+
 /**
  * Classe représentant un client de la banque. Toutes les informations
  * personnelles hormis le numéro d'identification sont de type String.
@@ -11,6 +13,7 @@ import javax.persistence.Id;
  * 
  */
 @Entity
+@Component
 public class Client {
 
 	/** Numéro d'identification du client. */

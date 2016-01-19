@@ -21,19 +21,39 @@
 			</list>
 		</property>
 	</bean>
-	
-	<bean id="database-test" destroy-method="close"
-		class="org.apache.commons.dbcp.BasicDataSource">
+
+	<bean id="database-test"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="${db.driver}" />
 		<property name="url" value="${db.url}" />
-		<property name="username" value="${db.username}" />
+		<property name="username" value="${db.user}" />
 		<property name="password" value="${db.password}" />
 	</bean>
 	
+	<bean id="database-test-pool" destroy-method="close"
+		class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource">
+		<property name="driverClassName" value="${db.driver}" />
+		<property name="url" value="${db.url}" />
+		<property name="username" value="${db.user}" />
+		<property name="password" value="${db.password}" />
+	</bean>
+
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="database-test" />
+		<property name="packagesToScan" value="fr" />
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="generateDdl" value="true" />
+			</bean>
+		</property>
 	</bean>
+
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+	
+	<context:component-scan base-package="fr"/>
 
 </beans>
 

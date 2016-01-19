@@ -6,16 +6,24 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import fr.gtm.proxibanquesi.dao.IDaoClient;
 
+
+@Transactional
 public class TestIDaoClient {
 	
-	@Autowired
 	private static IDaoClient dao;
+	private static ApplicationContext context;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		context = new ClassPathXmlApplicationContext("ApplicationContext.xml");
+		dao = (IDaoClient) context.getBean("dao");
 	}
 
 	@AfterClass
@@ -24,7 +32,7 @@ public class TestIDaoClient {
 
 	@Test
 	public void testFindAll() {
-		System.out.println(dao.findAll());
+		assertNotNull(dao.findAll());
 	}
 
 }
