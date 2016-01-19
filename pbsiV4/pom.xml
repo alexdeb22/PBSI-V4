@@ -29,5 +29,6 @@
 	</dependencyManagement>
 	<modules>
 		<module>Service</module>
+		<module>domaine</module>
 	</modules>
 </project>
