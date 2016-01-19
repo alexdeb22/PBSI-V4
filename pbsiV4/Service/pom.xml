@@ -29,7 +29,7 @@
 		</dependency>
 		<dependency>
 			<groupId>fr.gtm.proxibanquesi</groupId>
-			<artifactId>dao</artifactId>
+			<artifactId>dao.spring-data</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
