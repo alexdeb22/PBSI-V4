@@ -10,10 +10,12 @@ import javax.faces.context.FacesContext;
 
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import fr.gtm.proxibanquesi.domaine.Client;
+import fr.gtm.proxibanquesi.service.IServiceClient;
 
 
 
@@ -34,20 +36,21 @@ public class ClientBean implements Serializable {
 	private Client selectedClient;
 	private ArrayList<Client> clientList;
 
-	//@Autowired
-	//private IServiceClient serviceClient;
+	@Autowired
+	private IServiceClient serviceClient;
 	
 	/**
 	 * Methode d'initialisation du bean
 	 */
 	@PostConstruct
 	public void initBean() {
-		clientList= new ArrayList<Client>();
-		Client testc = new Client("yael", "candelier", "1 ru blabla", "etampes", "91150", "0671687609");
-		Client testc2 = new Client("yael2", "candelier2", "1 ru blabla2", "etampes2", "911502", "0671687609");
-		testc.setId(1);testc2.setId(2);
-		testc.setEmail("yael.candelier@gmail.com");testc2.setEmail("yael.candelier2@gmail.com");
-		clientList.add(testc);clientList.add(testc2);
+		clientList = (ArrayList<Client>) serviceClient.findAll();
+//		clientList= new ArrayList<Client>();
+//		Client testc = new Client("yael", "candelier", "1 ru blabla", "etampes", "91150", "0671687609");
+//		Client testc2 = new Client("yael2", "candelier2", "1 ru blabla2", "etampes2", "911502", "0671687609");
+//		testc.setId(1);testc2.setId(2);
+//		testc.setEmail("yael.candelier@gmail.com");testc2.setEmail("yael.candelier2@gmail.com");
+//		clientList.add(testc);clientList.add(testc2);
 	}
 	
 	/**
