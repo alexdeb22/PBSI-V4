@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import fr.gtm.proxibanquesi.domaine.Client;
@@ -22,8 +22,8 @@ import fr.gtm.proxibanquesi.domaine.Client;
  * Managed bean de gestion de la vue client
  * Permet de creer un nouveau client en base, d'afficher la liste des clients, de modifier les information clients et de supprimer un client
  */
-@ManagedBean(name ="ClientBean")
-@SessionScoped
+@ManagedBean
+@Scope
 @Component
 public class ClientBean implements Serializable {
 	
@@ -122,6 +122,7 @@ public class ClientBean implements Serializable {
 	public ArrayList<Client> getClientList() {
 		
 		//clientList=(ArrayList<Client>) serviceClient.findAll();
+		System.out.println(clientList);
 		return clientList;
 	}
 
@@ -132,7 +133,8 @@ public class ClientBean implements Serializable {
 	public void setClientList(ArrayList<Client> clientList) {
 		this.clientList = clientList;
 	}
-	
+
+
 	/**
 	 * Methode permettant de detecter la selection d'une ligne client en table dans la vue client
 	 * @param event l evenement selection

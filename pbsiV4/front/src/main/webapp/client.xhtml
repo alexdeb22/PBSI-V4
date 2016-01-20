@@ -12,7 +12,7 @@
 <h:body>
 
 	<f:facet name="last">
-		<h:outputStylesheet name="custom.css" library="css" />
+<!-- 		<h:outputStylesheet name="custom.css" library="css" /> -->
 	</f:facet>
 
 	
@@ -45,53 +45,53 @@
 
 			<p:contextMenu for="dataClient">
 				<p:menuitem value="Gestion Comptes" update="form2"
-					icon="ui-icon-gear" action="#{ClientBean.afficherComptes}" />
+					icon="ui-icon-gear" action="#{clientBean.afficherComptes}" />
 				<p:menuitem value="Update" update="form2" icon="ui-icon-pencil"
 					oncomplete="PF('updateDialog').show()" />
 				<p:menuitem value="Delete" update="panelclient" icon="ui-icon-close"
-					actionListener="#{ClientBean.delete}" />
+					actionListener="#{clientBean.delete}" />
 			</p:contextMenu>
 
-			<p:dataTable id="dataClient" var="client"
-				value="#{ClientBean.getClientList()}"
-				selection="#{ClientBean.selectedClient}" selectionMode="single"
-				rowKey="#{client.id}" first="#{client.id}" paginator="false"
+			<p:dataTable id="dataClient" var="cli"
+				value="#{clientBean.clientList}"
+				selection="#{clientBean.selectedClient}" selectionMode="single"
+				first="#{cli.id}" paginator="false" rowKey="#{cli.id}"
 				styleClass="ui-datatable" reflow="true" style="margin: 5px;"
 				resizableColumns="true">
 
 				<p:ajax event="rowSelect" update="form1:dataClient"
-					listener="#{ClientBean.onClientSelect}" />
+					listener="#{clientBean.onClientSelect}" />
 
 				<p:column headerText="Identifiant">
 					<f:facet name="header">Identifiant</f:facet>    				
-            		#{client.id}
+            		#{cli.id}
 				</p:column>
 				<p:column headerText="Nom">
 
-					<h:outputText value="#{client.nom}" />
+					<h:outputText value="#{cli.nom}" />
 				</p:column>
 				<p:column headerText="Prenom">
 					  	
-					#{client.prenom}
+					#{cli.prenom}
 				</p:column>
 				<p:column headerText="Adresse">
 					  	
-					#{client.adresse}
+					#{cli.adresse}
 				</p:column>
 				<p:column headerText="Ville">
 					
-					#{client.ville}
+					#{cli.ville}
 				</p:column>
 				<p:column headerText="Code Postal">
 					   	
-					#{client.codePostal}
+					#{cli.codePostal}
 				</p:column>
 				<p:column headerText="Telephone">
 					  	
-					#{client.telephone}
+					#{cli.telephone}
 				</p:column>
 				<p:column headerText="Email">
-					#{client.email}
+					#{cli.email}
 				</p:column>
 			</p:dataTable>
 		</h:form>
@@ -104,28 +104,28 @@
 				<p:growl id="growlUpdate" life="2000" />
 				<h:panelGrid id="grid2" columns="2" cellpadding="5">
 					<p:outputLabel for="nom" value="Nom :" />
-					<p:inputText id="nom" value="#{ClientBean.selectedClient.nom}"
+					<p:inputText id="nom" value="#{clientBean.selectedClient.nom}"
 						required="true" />
 					<p:outputLabel for="prenom" value="Prenom :" />
 					<p:inputText id="prenom"
-						value="#{ClientBean.selectedClient.prenom}" required="true" />
+						value="#{clientBean.selectedClient.prenom}" required="true" />
 					<p:outputLabel for="adresse" value="Adresse :" />
 					<p:inputText id="adresse"
-						value="#{ClientBean.selectedClient.adresse}" required="true" />
+						value="#{clientBean.selectedClient.adresse}" required="true" />
 					<p:outputLabel for="ville" value="Ville :" />
-					<p:inputText id="ville" value="#{ClientBean.selectedClient.ville}"
+					<p:inputText id="ville" value="#{clientBean.selectedClient.ville}"
 						required="true" />
 					<p:outputLabel for="codepostal" value="Codepostal :" />
 					<p:inputText id="codepostal"
-						value="#{ClientBean.selectedClient.codePostal}" required="true" />
+						value="#{clientBean.selectedClient.codePostal}" required="true" />
 					<p:outputLabel for="telephone" value="Tel :" />
 					<p:inputText id="telephone"
-						value="#{ClientBean.selectedClient.telephone}" required="true" />
+						value="#{clientBean.selectedClient.telephone}" required="true" />
 					<p:outputLabel for="email" value="Email :" />
-					<p:inputText id="email" value="#{ClientBean.selectedClient.email}"
+					<p:inputText id="email" value="#{clientBean.selectedClient.email}"
 						required="true" />
 					<p:commandButton type="submit" value="Update" update="panelclient"
-						action="#{ClientBean.update}" icon="ui-icon-check"
+						action="#{clientBean.update}" icon="ui-icon-check"
 						styleClass="ui-priority-primary" />
 				</h:panelGrid>
 			</h:form>
