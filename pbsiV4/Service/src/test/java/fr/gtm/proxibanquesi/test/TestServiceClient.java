@@ -23,7 +23,7 @@ public class TestServiceClient {
 	public void setUp(){
 		MockitoAnnotations.initMocks(this);
 		ser = new ServiceClient();
-//		ser.setDao(dao);
+		ser.setDao(dao);
 	}
 	
 	@Test
