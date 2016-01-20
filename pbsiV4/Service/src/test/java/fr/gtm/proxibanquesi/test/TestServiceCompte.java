@@ -71,4 +71,14 @@ public class TestServiceCompte {
 		System.out.println("Après : "+ser2.findOne(2).getSolde());
 	}
 	
+	@Test
+	public void testVirementInter() {
+		ApplicationContext context = new ClassPathXmlApplicationContext(new String[] {"service-context.xml","ApplicationContext.xml"});
+		ServiceCompte ser2 = (ServiceCompte) context.getBean("serviceCompte");
+		System.out.println("Avant : "+ser2.findOne(1).getSolde());
+		System.out.println("Avant : "+ser2.findOne(3).getSolde());
+		ser2.virementInterClient(ser2.findOne(1), 3, 20);
+		System.out.println("Après : "+ser2.findOne(1).getSolde());
+		System.out.println("Après : "+ser2.findOne(3).getSolde());
+	}
 }
