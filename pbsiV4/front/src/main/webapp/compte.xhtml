@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Gestion des comptes</title>
+
+</h:head>
+
+<h:body>
+
+	<f:facet name="last">
+		<h:outputStylesheet name="custom.css" library="css" />
+	</f:facet>
+
+	<p:panel style="background:#F2F7F9;">
+		<h:outputText value="ProxiBankV4 - Intranet" />
+		<div style="height: 80px" />
+	</p:panel>
+
+	<h:form id="navform">
+		<p:menubar>
+			<p:menuitem value="Clients" url="faces/client.xhtml" />
+			<p:menuitem value="Comptes" url="#" />
+			<f:facet name="options">
+				<p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
+			</f:facet>
+		</p:menubar>
+	</h:form>
+
+
+
+	<h3 class="title ui-widget-header ui-corner-all">Liste des Comptes : #{clientBean.selectedClient.nom} #{cclientBean.selectedClient.prenom} (Client no°: #{clientBean.selectedClient.id})
+	</h3>
+
+	<p:outputPanel id="panelcompte">
+		<h:form id="form1">
+
+			<p:contextMenu for="dataCompte">
+				<p:menuitem value="Virement" update="form2" icon="ui-icon-gear"
+					action="#{compteBean.virement}" />
+				<p:menuitem value="Modifier infos" update="form2"
+					icon="ui-icon-pencil" oncomplete="PF('updateDialog').show()" />
+				<p:menuitem value="Delete" update="panelcompte" icon="ui-icon-close"
+					actionListener="#{compteBean.delete}" />
+			</p:contextMenu>
+
+			<p:dataTable id="dataCompte" var="comp"
+				value="#{clientBean.selectedClient.listeComptes}"
+				selection="#{compteBean.selectedCompte}" selectionMode="single"
+				rowKey="#{comp.numCompte}" first="#{comp.numCompte}" paginator="false"
+				styleClass="ui-datatable" reflow="true" style="margin: 5px;"
+				resizableColumns="true">
+
+				<p:ajax event="rowSelect" update="form1:dataCompte"
+					listener="#{compteBean.onCompteSelect}" />
+
+				<p:column headerText="Type Compte">				
+            		#{comp}
+				</p:column>
+				<p:column headerText="NumCompte">
+					#{comp.numCompte}
+				</p:column>
+				<p:column headerText="DateOuverture">  	
+					#{comp.dateOuverture}
+				</p:column>
+				<p:column headerText="Solde">	  	
+					#{comp.solde}
+				</p:column>
+			</p:dataTable>
+		</h:form>
+
+
+		<p:dialog header="Mise à jour infos Compte" widgetVar="updateDialog"
+			modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+			<h:form id="form2">
+
+				<p:growl id="growlUpdate" life="2000" />
+				<h:panelGrid id="grid2" columns="2" cellpadding="5">
+
+					<p:outputLabel for="dateouv" value="Date d'ouverture :" />
+					<p:inputText id="dateouv"
+						value="#{compteBean.selectedCompte.dateOuverture}" required="true" />
+
+					<p:outputLabel for="solde" value="Solde :" />
+					<p:inputText id="solde" value="#{compteBean.selectedCompte.solde}"
+						required="true" />
+
+					<p:outputLabel for="decouvert" value="Decouvert autorisé :" />
+					<p:inputText id="decouvert"
+						value="#"
+						required="true" />
+
+					<p:outputLabel for="txremun" value="Taux remuneration :" />
+					<p:inputText id="txremun"
+						value="#"
+						required="true" />
+
+					<p:commandButton type="submit" value="Update" update="panelcompte"
+						action="#{compteBean.update}" icon="ui-icon-check"
+						styleClass="ui-priority-primary" />
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+
+	</p:outputPanel>
+
+</h:body>
+</html>

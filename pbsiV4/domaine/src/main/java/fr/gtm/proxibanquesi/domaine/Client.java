@@ -21,6 +21,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class Client {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/** Numéro d'identification du client. */
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)

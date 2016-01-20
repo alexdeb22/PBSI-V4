@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.SelectEvent;
@@ -44,6 +46,7 @@ public class ClientBean implements Serializable {
 	 */
 	@PostConstruct
 	public void initBean() {
+		System.out.println("Creation bean client");
 		clientList = (ArrayList<Client>) serviceClient.findAll();
 //		clientList= new ArrayList<Client>();
 //		Client testc = new Client("yael", "candelier", "1 ru blabla", "etampes", "91150", "0671687609");
@@ -51,6 +54,11 @@ public class ClientBean implements Serializable {
 //		testc.setId(1);testc2.setId(2);
 //		testc.setEmail("yael.candelier@gmail.com");testc2.setEmail("yael.candelier2@gmail.com");
 //		clientList.add(testc);clientList.add(testc2);
+	}
+	
+	@PreDestroy
+	public void finBean() {
+		System.out.println("Destruction bean client");
 	}
 	
 	/**
@@ -123,9 +131,6 @@ public class ClientBean implements Serializable {
 	 * @return la liste des clients en base
 	 */
 	public ArrayList<Client> getClientList() {
-		
-		//clientList=(ArrayList<Client>) serviceClient.findAll();
-		System.out.println(clientList);
 		return clientList;
 	}
 
@@ -156,11 +161,11 @@ public class ClientBean implements Serializable {
 		this.selectedClient = null;
 	}
 	
-	/**
-	 * Methode permettant de detecter la selection d'une ligne client en table dans la vue client
-	 * @param event l evenement selection
-	 */
-	public void rowSelect(SelectEvent event) {
-		this.selectedClient = (Client) event.getObject();
-	}
+//	/**
+//	 * Methode permettant de detecter la selection d'une ligne client en table dans la vue client
+//	 * @param event l evenement selection
+//	 */
+//	public void rowSelect(SelectEvent event) {
+//		this.selectedClient = (Client) event.getObject();
+//	}
 }

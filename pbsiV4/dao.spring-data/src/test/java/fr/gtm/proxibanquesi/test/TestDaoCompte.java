@@ -46,12 +46,10 @@ public class TestDaoCompte {
 	public void testCreateCompte() {
 		CompteCourant compte = new CompteCourant(5000);
 		compte.setDateOuverture(new Date());
-		compte.setIdcli(1);
 		dao.save(compte);
 		assertNotNull(dao.findOne(compte.getNumCompte()));
 		CompteEpargne compte2 = new CompteEpargne(5000);
 		compte2.setDateOuverture(new Date());
-		compte2.setIdcli(1);
 		dao.save(compte2);
 		assertNotNull(dao.findOne(compte2.getNumCompte()));
 	}

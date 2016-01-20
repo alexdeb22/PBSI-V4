@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
+import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 
@@ -30,7 +32,8 @@ public abstract class Compte {
 	/** Date d'ouverture du compte */
 	private Date dateOuverture;
 	/** Numéro d'identification du client auquel le compte appartient */
-	private Integer idcli;
+	@Transient
+	private Client client;
 	
 	// Getters & Setters
 	/**
@@ -81,21 +84,12 @@ public abstract class Compte {
 	public void setDateOuverture(Date dateOuverture) {
 		this.dateOuverture = dateOuverture;
 	}
-	/**
-	 * Getter de la propriété idcli
-	 * 
-	 * @return La propriété idcli
-	 */
-	public Integer getIdcli() {
-		return idcli;
+
+	public Client getClient() {
+		return client;
 	}
-	/**
-	 * Setter de la propriété idcli
-	 * 
-	 * @return void
-	 */
-	public void setIdcli(Integer idcli) {
-		this.idcli = idcli;
+	public void setClient(Client client) {
+		this.client = client;
 	}
 	// Affichage
 	/**
