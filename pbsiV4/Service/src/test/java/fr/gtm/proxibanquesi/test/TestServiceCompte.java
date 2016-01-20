@@ -60,6 +60,15 @@ public class TestServiceCompte {
 		Mockito.verify(dao, Mockito.times(0)).save(cDeb);
 	}
 	
-	
+	@Test
+	public void testVirementIntra() {
+		ApplicationContext context = new ClassPathXmlApplicationContext(new String[] {"service-context.xml","ApplicationContext.xml"});
+		ServiceCompte ser2 = (ServiceCompte) context.getBean("serviceCompte");
+		System.out.println("Avant : "+ser2.findOne(1).getSolde());
+		System.out.println("Avant : "+ser2.findOne(2).getSolde());
+		ser2.virementIntraClient(ser2.findOne(1), ser2.findOne(2), 20);
+		System.out.println("Après : "+ser2.findOne(1).getSolde());
+		System.out.println("Après : "+ser2.findOne(2).getSolde());
+	}
 	
 }
