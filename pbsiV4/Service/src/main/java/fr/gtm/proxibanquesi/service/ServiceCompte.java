@@ -72,4 +72,12 @@ public class ServiceCompte implements IServiceCompte {
 		
 	}
 
+	public void createOrUpdate(Compte compte) {
+		dao.save(compte);
+	}
+
+	public void delete(Compte compte) {
+		dao.delete(compte);
+	}
+
 }

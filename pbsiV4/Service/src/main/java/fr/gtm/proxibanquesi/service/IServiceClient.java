@@ -10,9 +10,23 @@ import fr.gtm.proxibanquesi.domaine.Client;
  */
 public interface IServiceClient {
 	
+	
 	/**
 	 * Methode qui retourne la liste de tous les clients
+	 * @return List<Client> : retourne une liste de Clients
 	 */
 	public List<Client> findAll();
 
+	
+	/**
+	 * Méthode qui crée ou modifie un client en base
+	 * @param client : le Client à créer ou modifier
+	 */
+	public void createOrUpdate(Client client);
+	
+	/**
+	 * Méthode qui supprime un client en base
+	 * @param client : le Client à supprimer
+	 */
+	public void delete(Client client);
 }

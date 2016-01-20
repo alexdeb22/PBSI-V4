@@ -14,4 +14,6 @@ public interface IServiceCompte {
 	public List<Compte> findAll();
 	public void virement(Compte cAv, Compte cAp, double montant);
 
+	public void createOrUpdate(Compte compte);
+	public void delete(Compte compte);
 }

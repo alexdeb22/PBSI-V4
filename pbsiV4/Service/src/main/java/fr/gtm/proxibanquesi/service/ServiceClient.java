@@ -50,6 +50,22 @@ public class ServiceClient implements IServiceClient {
 	public void setDao(IDaoClient dao) {
 		this.dao = dao;
 	}
+
+	/**
+	 * Méthode qui crée ou modifie un client en base
+	 * @param client : le Client à créer ou modifier
+	 */
+	public void createOrUpdate(Client client) {
+		dao.save(client);
+	}
+
+	/**
+	 * Méthode qui supprime un client en base
+	 * @param client : le Client à supprimer
+	 */
+	public void delete(Client client) {
+		dao.delete(client);
+	}
 	
 	
 
