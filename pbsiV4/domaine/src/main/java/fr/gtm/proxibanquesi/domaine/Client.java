@@ -2,8 +2,8 @@ package fr.gtm.proxibanquesi.domaine;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -53,7 +53,7 @@ public class Client {
 	 * Adresse email du client.
 	 */
 	private String email;
-	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+	@OneToMany(fetch=FetchType.EAGER)
 	private List<Compte> listeComptes;
 	
 
@@ -244,7 +244,7 @@ public class Client {
 	@Override
 	public String toString() {
 		return "Client [nom=" + nom + ", prenom=" + prenom + ", adresse=" + adresse + ", codePostal=" + codePostal
-				+ ", ville=" + ville + ", telephone=" + telephone + ", id=" + id + "]";
+				+ ", ville=" + ville + ", telephone=" + telephone + ", id=" + id + ", liste des comptes: " + listeComptes + "]";
 	}
 
 }
