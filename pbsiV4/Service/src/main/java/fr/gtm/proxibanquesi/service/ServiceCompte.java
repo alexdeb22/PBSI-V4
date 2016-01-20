@@ -60,7 +60,7 @@ public class ServiceCompte implements IServiceCompte {
 		this.dao = dao;
 	}
 
-	public void virement(Compte cDeb, Compte cCre, double montant) {
+	public void virementIntraClient(Compte cDeb, Compte cCre, double montant) {
 		if (cDeb instanceof CompteEpargne && cDeb.getSolde() >= montant || cDeb instanceof CompteCourant && cDeb.getSolde()+ ((CompteCourant)cDeb).getAutorisationDecouvert() >= montant) {
 			cDeb.setSolde(cDeb.getSolde()-montant);
 			cCre.setSolde(cCre.getSolde()+montant);
@@ -78,6 +78,19 @@ public class ServiceCompte implements IServiceCompte {
 
 	public void delete(Compte compte) {
 		dao.delete(compte);
+	}
+
+
+	public void virementInterClient(Compte cDeb, Integer numCompteCre, double montant) {
+		Compte cCre = dao.findOne(numCompteCre);
+		if (cDeb instanceof CompteEpargne && cDeb.getSolde() >= montant || cDeb instanceof CompteCourant && cDeb.getSolde()+ ((CompteCourant)cDeb).getAutorisationDecouvert() >= montant) {
+			cDeb.setSolde(cDeb.getSolde()-montant);
+			cCre.setSolde(cCre.getSolde()+montant);
+			dao.save(cDeb);
+			dao.save(cCre);
+		} else {
+//			throw new exception;
+		}
 	}
 
 }

@@ -12,8 +12,8 @@ public interface IServiceCompte {
 	
 	public Compte findOne(Integer numcompte);
 	public List<Compte> findAll();
-	public void virement(Compte cAv, Compte cAp, double montant);
-
+	public void virementIntraClient(Compte cDeb, Compte cCre, double montant);
+	public void virementInterClient(Compte cDeb, Integer numCompteCre, double montant);
 	public void createOrUpdate(Compte compte);
 	public void delete(Compte compte);
 }
