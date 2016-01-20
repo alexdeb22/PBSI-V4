@@ -19,7 +19,7 @@ public class TestIDaoClient {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		context = new ClassPathXmlApplicationContext("ApplicationContext.xml");
-		dao = (IDaoClient) context.getBean("dao");
+		dao = (IDaoClient) context.getBean("daoClient");
 	}
 
 	@AfterClass

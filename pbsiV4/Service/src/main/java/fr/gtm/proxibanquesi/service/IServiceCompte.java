@@ -1,5 +1,7 @@
 package fr.gtm.proxibanquesi.service;
 
+import java.util.List;
+
 import fr.gtm.proxibanquesi.domaine.Compte;
 
 /**
@@ -9,5 +11,6 @@ import fr.gtm.proxibanquesi.domaine.Compte;
 public interface IServiceCompte {
 	
 	public Compte findOne(Integer numcompte);
+	public List<Compte> findAll();
 
 }

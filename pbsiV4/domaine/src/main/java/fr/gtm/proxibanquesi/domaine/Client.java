@@ -1,9 +1,13 @@
 package fr.gtm.proxibanquesi.domaine;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.springframework.stereotype.Component;
 
@@ -49,6 +53,9 @@ public class Client {
 	 * Adresse email du client.
 	 */
 	private String email;
+	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+	private List<Compte> listeComptes;
+	
 
 	// Constructeurs
 	/**
@@ -67,8 +74,9 @@ public class Client {
 	 * @param codePostal
 	 * @param ville
 	 * @param telephone
+	 * @param email
 	 */
-	public Client(String nom, String prenom, String adresse, String codePostal, String ville, String telephone) {
+	public Client(String nom, String prenom, String adresse, String codePostal, String ville, String telephone, String email) {
 		this();
 		this.nom = nom;
 		this.prenom = prenom;
@@ -76,6 +84,7 @@ public class Client {
 		this.codePostal = codePostal;
 		this.ville = ville;
 		this.telephone = telephone;
+		this.email = email;
 	}
 
 	// Getters & Setters
@@ -221,6 +230,14 @@ public class Client {
 	 */
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public List<Compte> getListeComptes() {
+		return listeComptes;
+	}
+
+	public void setListeComptes(List<Compte> listeComptes) {
+		this.listeComptes = listeComptes;
 	}
 
 	// Affichage

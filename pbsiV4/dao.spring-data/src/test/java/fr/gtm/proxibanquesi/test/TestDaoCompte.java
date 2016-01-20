@@ -2,6 +2,8 @@ package fr.gtm.proxibanquesi.test;
 
 import static org.junit.Assert.*;
 
+import java.util.Date;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -11,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import fr.gtm.proxibanquesi.dao.IDaoCompte;
 import fr.gtm.proxibanquesi.domaine.Compte;
+import fr.gtm.proxibanquesi.domaine.CompteCourant;
+import fr.gtm.proxibanquesi.domaine.CompteEpargne;
 
 @Transactional
 public class TestDaoCompte {
@@ -36,6 +40,26 @@ public class TestDaoCompte {
 	@Test
 	public void testFindOneReturnCompte(){
 		assertTrue(dao.findOne(1) instanceof Compte);
+	}
+	
+	@Test
+	public void testCreateCompte() {
+		CompteCourant compte = new CompteCourant(5000);
+		compte.setDateOuverture(new Date());
+		compte.setIdcli(1);
+		dao.save(compte);
+		assertNotNull(dao.findOne(compte.getNumCompte()));
+		CompteEpargne compte2 = new CompteEpargne(5000);
+		compte2.setDateOuverture(new Date());
+		compte2.setIdcli(1);
+		dao.save(compte2);
+		assertNotNull(dao.findOne(compte2.getNumCompte()));
+	}
+	
+	@Test
+	public void testFindAll() {
+		System.out.println(dao.findAll());
+		assertNotNull(dao.findAll());
 	}
 
 }

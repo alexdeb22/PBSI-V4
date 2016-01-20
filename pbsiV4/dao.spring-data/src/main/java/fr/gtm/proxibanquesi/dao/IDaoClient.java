@@ -9,7 +9,7 @@ import fr.gtm.proxibanquesi.domaine.Client;
  * Interface DaoClient. Elle liste les méthodes CRUD d'un client et une méthode qui retourne la liste de tous les clients
  *
  */
-@Repository("dao")
+@Repository("daoClient")
 public interface IDaoClient extends JpaRepository<Client, Integer> {
 
 }
