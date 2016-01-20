@@ -22,9 +22,9 @@
 
 	<h:form id="log">
 		<h:panelGrid columns="1">
-			<p:inputText />
-			<p:password />
-			<p:commandButton id="log-button" action="faces/client.xhtml"
+			<p:inputText value="#{loginBean.employe.login}" />
+			<p:password value="#{loginBean.employe.mdp}"/>
+			<p:commandButton id="log-button" action="#{loginBean.authentification}"
 				value="Se connecter" />
 		</h:panelGrid>
 	</h:form>
