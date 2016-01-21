@@ -46,7 +46,7 @@ public class LoginBean {
 		this.employe = employe;
 	}
 	
-	public String authentification() {
-		return "faces/client.xhtml";
+	public void authentification() {
+		
 	}
 }

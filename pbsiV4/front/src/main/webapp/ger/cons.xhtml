@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Liste des conseillers</title>
+
+</h:head>
+
+<h:body>
+
+	<f:facet name="last">
+<!-- 		<h:outputStylesheet name="custom.css" library="css" /> -->
+	</f:facet>
+
+	
+
+	<p:panel style="background:#F2F7F9;">
+		<h:outputText value="ProxiBankV4 - Intranet" />
+		<div style="height: 80px" />
+	</p:panel>
+
+	<h:form id="navform">
+	<p:menubar>
+		<p:menuitem value="Clients" url="client.xhtml" />
+		<p:menuitem value="Comptes" url="compte.xhtml" />
+		<f:facet name="options">
+			<p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
+		</f:facet>
+	</p:menubar>
+	</h:form>
+
+	
+
+	<h3 class="title ui-widget-header ui-corner-all">
+	Liste des clients
+	</h3>
+	
+	<p:outputPanel id="panelclient">
+		<h:form id="form1">
+
+			
+
+			<p:contextMenu for="dataClient">
+				<p:menuitem value="Gestion Comptes" update="form2"
+					icon="ui-icon-gear" action="#{clientBean.afficherComptes}" />
+				<p:menuitem value="Update" update="form2" icon="ui-icon-pencil"
+					oncomplete="PF('updateDialog').show()" />
+				<p:menuitem value="Delete" update="panelclient" icon="ui-icon-close"
+					actionListener="#{clientBean.delete}" />
+			</p:contextMenu>
+
+			<p:dataTable id="dataClient" var="cli"
+				value="#{clientBean.clientList}"
+				selection="#{clientBean.selectedClient}" selectionMode="single"
+				first="#{cli.id}" paginator="false" rowKey="#{cli.id}"
+				styleClass="ui-datatable" reflow="true" style="margin: 5px;"
+				resizableColumns="true">
+
+				<p:ajax event="rowSelect" update="form1:dataClient"
+					listener="#{clientBean.onClientSelect}" />
+
+				<p:column headerText="Identifiant">
+					<f:facet name="header">Identifiant</f:facet>    				
+            		#{cli.id}
+				</p:column>
+				<p:column headerText="Nom">
+
+					<h:outputText value="#{cli.nom}" />
+				</p:column>
+				<p:column headerText="Prenom">
+					  	
+					#{cli.prenom}
+				</p:column>
+				<p:column headerText="Adresse">
+					  	
+					#{cli.adresse}
+				</p:column>
+				<p:column headerText="Ville">
+					
+					#{cli.ville}
+				</p:column>
+				<p:column headerText="Code Postal">
+					   	
+					#{cli.codePostal}
+				</p:column>
+				<p:column headerText="Telephone">
+					  	
+					#{cli.telephone}
+				</p:column>
+				<p:column headerText="Email">
+					#{cli.email}
+				</p:column>
+			</p:dataTable>
+		</h:form>
+
+
+		<p:dialog header="Mise à jour infos Client" widgetVar="updateDialog"
+			modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+			<h:form id="form2">
+
+				<p:growl id="growlUpdate" life="2000" />
+				<h:panelGrid id="grid2" columns="2" cellpadding="5">
+					<p:outputLabel for="nom" value="Nom :" />
+					<p:inputText id="nom" value="#{clientBean.selectedClient.nom}"
+						required="true" />
+					<p:outputLabel for="prenom" value="Prenom :" />
+					<p:inputText id="prenom"
+						value="#{clientBean.selectedClient.prenom}" required="true" />
+					<p:outputLabel for="adresse" value="Adresse :" />
+					<p:inputText id="adresse"
+						value="#{clientBean.selectedClient.adresse}" required="true" />
+					<p:outputLabel for="ville" value="Ville :" />
+					<p:inputText id="ville" value="#{clientBean.selectedClient.ville}"
+						required="true" />
+					<p:outputLabel for="codepostal" value="Codepostal :" />
+					<p:inputText id="codepostal"
+						value="#{clientBean.selectedClient.codePostal}" required="true" />
+					<p:outputLabel for="telephone" value="Tel :" />
+					<p:inputText id="telephone"
+						value="#{clientBean.selectedClient.telephone}" required="true" />
+					<p:outputLabel for="email" value="Email :" />
+					<p:inputText id="email" value="#{clientBean.selectedClient.email}"
+						required="true" />
+					<p:commandButton type="submit" value="Update" update="panelclient"
+						action="#{clientBean.update}" icon="ui-icon-check"
+						styleClass="ui-priority-primary" />
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+
+	</p:outputPanel>
+
+</h:body>
+</html>
