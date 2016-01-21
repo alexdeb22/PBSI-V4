@@ -55,6 +55,9 @@ public class LoginBean {
 	}
 
 	public Employe getEmploye() {
+		if(employe.getId() != null){
+			employe = serv.findOne(employe.getId());
+		}
 		return employe;
 	}
 
@@ -108,15 +111,21 @@ public class LoginBean {
 		return "/faces/accueil.xhtml";
 	}
 	
+	/**
+	 * Methode de creation d'un nouveau client
+	 * 
+	 * @return une chaine de caratere referencant une page xhtml client
+	 */
 	public String create() {
 		System.out.println("appel create client");
 		System.out.println("nouveau client :" + nouveauClient);
 		((Conseiller) employe).getListeClients().add(nouveauClient);
 		serv.createOrUpdate(employe);
-		employe = serv.findOne(employe.getId());
+//		employe = serv.findOne(employe.getId());
 		addMessage("Ajout client effectué");
 		return "/faces/cons/client.xhtml";
 	}
+	
 	
 	public void addMessage(String summary) {
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, null);
