@@ -82,5 +82,10 @@ public abstract class Employe {
 		this.mdp = mdp;
 	}
 
+	@Override
+	public String toString() {
+		return "Employe [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", login=" + login + ", mdp=" + mdp + "]";
+	}
+
 
 }

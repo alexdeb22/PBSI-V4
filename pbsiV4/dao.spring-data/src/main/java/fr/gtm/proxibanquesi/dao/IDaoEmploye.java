@@ -12,4 +12,6 @@ import fr.gtm.proxibanquesi.domaine.Employe;
 @Repository("daoEmploye")
 public interface IDaoEmploye extends JpaRepository<Employe, Integer> {
 
+	public Employe findByLoginAndMdp(String login, String mdp); 
+	
 }

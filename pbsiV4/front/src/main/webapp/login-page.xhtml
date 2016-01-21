@@ -26,7 +26,7 @@
 			<p:inputText id="j_username" value="#{loginBean.employe.login}" />
 			<p:outputLabel for="j_password" value="Password : " />
 			<p:password id="j_password" value="#{loginBean.employe.mdp}"/>
-			<p:commandButton id="submit" value="Se connecter" action="#{loginBean.authentification}" ajax="false" />
+			<p:commandButton type="submit" value="Se connecter" ajax="false"/>
 		</h:panelGrid>
 	</h:form>
 
