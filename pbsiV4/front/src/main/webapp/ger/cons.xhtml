@@ -35,7 +35,7 @@
 	
 
 	<h3 class="title ui-widget-header ui-corner-all">
-	Liste des clients
+	Liste des conseillers
 	</h3>
 	
 	<p:outputPanel id="panelclient">
@@ -52,10 +52,10 @@
 					actionListener="#{clientBean.delete}" />
 			</p:contextMenu>
 
-			<p:dataTable id="dataClient" var="cli"
-				value="#{clientBean.clientList}"
+			<p:dataTable id="dataClient" var="cons"
+				value="#{loginBean.employe.listeConseillers}"
 				selection="#{clientBean.selectedClient}" selectionMode="single"
-				first="#{cli.id}" paginator="false" rowKey="#{cli.id}"
+				first="#{cons.id}" paginator="false" rowKey="#{cons.id}"
 				styleClass="ui-datatable" reflow="true" style="margin: 5px;"
 				resizableColumns="true">
 
@@ -64,35 +64,17 @@
 
 				<p:column headerText="Identifiant">
 					<f:facet name="header">Identifiant</f:facet>    				
-            		#{cli.id}
+            		#{cons.id}
 				</p:column>
 				<p:column headerText="Nom">
 
-					<h:outputText value="#{cli.nom}" />
+					<h:outputText value="#{cons.nom}" />
 				</p:column>
 				<p:column headerText="Prenom">
 					  	
-					#{cli.prenom}
+					#{cons.prenom}
 				</p:column>
-				<p:column headerText="Adresse">
-					  	
-					#{cli.adresse}
-				</p:column>
-				<p:column headerText="Ville">
-					
-					#{cli.ville}
-				</p:column>
-				<p:column headerText="Code Postal">
-					   	
-					#{cli.codePostal}
-				</p:column>
-				<p:column headerText="Telephone">
-					  	
-					#{cli.telephone}
-				</p:column>
-				<p:column headerText="Email">
-					#{cli.email}
-				</p:column>
+				
 			</p:dataTable>
 		</h:form>
 
