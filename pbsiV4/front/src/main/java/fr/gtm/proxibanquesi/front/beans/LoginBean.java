@@ -3,7 +3,10 @@ package fr.gtm.proxibanquesi.front.beans;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -11,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import fr.gtm.proxibanquesi.domaine.Conseiller;
 import fr.gtm.proxibanquesi.domaine.Employe;
+import fr.gtm.proxibanquesi.domaine.Gerant;
 import fr.gtm.proxibanquesi.service.IServiceEmploye;
 
 @ManagedBean
@@ -46,6 +50,10 @@ public class LoginBean {
 	}
 
 	public Employe getEmploye() {
+//		if (serv.findByLoginAndMdp(employe.getLogin(), employe.getMdp()) != null) {
+//			employe = serv.findByLoginAndMdp(employe.getLogin(), employe.getMdp());
+//			System.out.println("Auth");
+//		}
 		return employe;
 	}
 
@@ -61,8 +69,23 @@ public class LoginBean {
 		this.serv = serv;
 	}
 
-	public void authentification() {
+	public String authentification() {
+		System.out.println(employe.getLogin() + " " + employe.getMdp() );
+		if (serv.findByLoginAndMdp(employe.getLogin(), employe.getMdp()) != null) {
 		employe = serv.findByLoginAndMdp(employe.getLogin(), employe.getMdp());
-		System.out.println("Auth");
+		}
+		try {
+			((HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest()).login(employe.getLogin(), employe.getMdp());
+		} catch (ServletException e) {
+			e.printStackTrace();
+			return "/faces/erreur.xhtml";
+		}
+		if (employe instanceof Conseiller) {
+		return "/faces/cons/client.xhtml";
+		} else if (employe instanceof Gerant) {
+			return "/faces/ger/cons.xhtml";
+		}
+		return "/faces/erreur.xhtml";
+		
 	}
 }

@@ -52,7 +52,7 @@
 			
 
 			<p:dataTable id="dataClient" var="cli"
-				value="#{clientBean.clientList}"
+				value="#{loginBean.employe.listeClients}"
 				selection="#{clientBean.selectedClient}" selectionMode="single"
 				first="#{cli.id}" paginator="false" rowKey="#{cli.id}"
 				styleClass="ui-datatable" reflow="true" style="margin: 5px;"
