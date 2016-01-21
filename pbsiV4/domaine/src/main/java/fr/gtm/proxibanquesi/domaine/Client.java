@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 
 import org.springframework.stereotype.Component;
 
@@ -27,7 +28,8 @@ public class Client {
 	private static final long serialVersionUID = 1L;
 	/** Numéro d'identification du client. */
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@SequenceGenerator(name="clientSeq", sequenceName="SEQ_CLIENT", allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="clientSeq")
 	private Integer id;
 	/**
 	 * Nom de famille du client.

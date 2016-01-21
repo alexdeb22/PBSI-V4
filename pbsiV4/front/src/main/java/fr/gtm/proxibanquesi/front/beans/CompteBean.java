@@ -8,20 +8,21 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import fr.gtm.proxibanquesi.domaine.Client;
 import fr.gtm.proxibanquesi.domaine.Compte;
+import fr.gtm.proxibanquesi.service.IServiceCompte;
+
 
 @ManagedBean
-@Scope
+@Scope()
 @Component
 public class CompteBean implements Serializable {
 
@@ -31,7 +32,13 @@ public class CompteBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Compte selectedCompte;
 	private List<Compte> compteList;
+	private Compte destination;
+	private double montant;
+	private int idCompteExterneDestination;
 	
+	@Autowired
+	private IServiceCompte iservCompte;
+
 	@Value("#{clientBean}")
 	private ClientBean ownerBean;
 
@@ -39,42 +46,66 @@ public class CompteBean implements Serializable {
 	public void initBean() {
 		System.out.println("Creation bean compte");
 		System.out.println("Owner= " + ownerBean.getSelectedClient());
-//		compteList = ownerBean.getSelectedClient().getListeComptes();
-//		WebApplicationContext context = ContextLoader.getCurrentWebApplicationContext();
-//		ClientBean clibean = (ClientBean) context.getBean("clientBean");
-//		owner = clibean.getSelectedClient();
-		
-//		System.out.println("Proprietaire" + owner);
-//		selectedCompte = null;
-//		compteList = owner.getListeComptes();
-		
-		// compteList= new ArrayList<Compte>();
-		// CompteCourant testc = new CompteCourant(1566.60);
-		// CompteEpargne testc2 = new CompteEpargne(500.00);
-		// testc.setNumCompte(1);testc2.setNumCompte(2);
-		// testc.setDateOuverture(new Date());testc2.setDateOuverture(new
-		// Date());
-		// compteList.add(testc);compteList.add(testc2);
+		selectedCompte = null;
+		destination=null;
 	}
 
 	@PreDestroy
 	public void finBean() {
 		System.out.println("Destruction du bean compte");
 	}
-	
+
 	public CompteBean() {
 		super();
 	}
 
+	public String virementInit() {
+		System.out.println("Owner= " + ownerBean.getSelectedClient());
+		compteList = ownerBean.getSelectedClient().getListeComptes();
+
+		if (compteList.size() == 2) {
+
+			if (selectedCompte.toString().equalsIgnoreCase("COURANT")) {
+				if (compteList.get(0).toString().equalsIgnoreCase("COURANT")) {
+					destination = compteList.get(1);
+				} else {
+					destination = compteList.get(0);
+				}
+			} else if (selectedCompte.toString().equalsIgnoreCase("EPARGNE")) {
+				if (compteList.get(0).toString().equalsIgnoreCase("EPARGNE")) {
+					destination = compteList.get(1);
+				} else {
+					destination = compteList.get(0);
+				}
+			}
+			else {
+				addMessage("erreur type de compte inconnu");
+			}
+		} else {
+			addMessage("erreur pas 2 comptes presents");
+		}
+		System.out.println(destination);
+		return "compte";
+	}
+
 	public String update() {
 
+		System.out.println("appel update compte");
 		addMessage("Mise a jour compte effectuée");
 		return "compte";
 	}
 
 	public String virement() {
+		System.out.println("appel virement compte");
+		iservCompte.virementIntraClient(selectedCompte, destination,montant);
 		addMessage("Virement effectué");
 		return "compte";
+	}
+	
+	public void virementExterne() {
+		System.out.println("appel virement externe compte");
+		iservCompte.virementInterClient(selectedCompte, idCompteExterneDestination, montant);
+		addMessage("Virement effectué");
 	}
 
 	public String create() {
@@ -133,5 +164,43 @@ public class CompteBean implements Serializable {
 	public void rowSelect(SelectEvent event) {
 		this.selectedCompte = (Compte) event.getObject();
 	}
+
+	public Compte getDestination() {
+		return destination;
+	}
+
+	public void setDestination(Compte destination) {
+		this.destination = destination;
+	}
+
+	public double getMontant() {
+		return montant;
+	}
+
+	public void setMontant(double montant) {
+		this.montant = montant;
+	}
+
+	public int getIdCompteExterneDestination() {
+		return idCompteExterneDestination;
+	}
+
+	public void setIdCompteExterneDestination(int idCompteExterneDestination) {
+		this.idCompteExterneDestination = idCompteExterneDestination;
+	}
+
+	public void setCompteList(List<Compte> compteList) {
+		this.compteList = compteList;
+	}
+
+	public IServiceCompte getIservCompte() {
+		return iservCompte;
+	}
+
+	public void setIservCompte(IServiceCompte iservCompte) {
+		this.iservCompte = iservCompte;
+	}
+	
+	
 
 }

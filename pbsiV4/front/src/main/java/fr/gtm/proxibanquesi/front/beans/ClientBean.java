@@ -7,7 +7,6 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.SelectEvent;
@@ -19,28 +18,27 @@ import org.springframework.stereotype.Component;
 import fr.gtm.proxibanquesi.domaine.Client;
 import fr.gtm.proxibanquesi.service.IServiceClient;
 
-
-
 /**
- * @author bobi
- * Managed bean de gestion de la vue client
- * Permet de creer un nouveau client en base, d'afficher la liste des clients, de modifier les information clients et de supprimer un client
+ * @author bobi Managed bean de gestion de la vue client Permet de creer un
+ *         nouveau client en base, d'afficher la liste des clients, de modifier
+ *         les information clients et de supprimer un client
  */
 @ManagedBean
 @Scope
 @Component
 public class ClientBean implements Serializable {
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private Client selectedClient;
+	private Client nouveauClient;
 	private ArrayList<Client> clientList;
 
 	@Autowired
 	private IServiceClient serviceClient;
-	
+
 	/**
 	 * Methode d'initialisation du bean
 	 */
@@ -48,19 +46,14 @@ public class ClientBean implements Serializable {
 	public void initBean() {
 		System.out.println("Creation bean client");
 		clientList = (ArrayList<Client>) serviceClient.findAll();
-//		clientList= new ArrayList<Client>();
-//		Client testc = new Client("yael", "candelier", "1 ru blabla", "etampes", "91150", "0671687609");
-//		Client testc2 = new Client("yael2", "candelier2", "1 ru blabla2", "etampes2", "911502", "0671687609");
-//		testc.setId(1);testc2.setId(2);
-//		testc.setEmail("yael.candelier@gmail.com");testc2.setEmail("yael.candelier2@gmail.com");
-//		clientList.add(testc);clientList.add(testc2);
+		nouveauClient = new Client();
 	}
-	
+
 	@PreDestroy
 	public void finBean() {
 		System.out.println("Destruction bean client");
 	}
-	
+
 	/**
 	 * Constructeur par default du bean
 	 */
@@ -70,16 +63,33 @@ public class ClientBean implements Serializable {
 
 	/**
 	 * Mehtode de mise à jour des infos client
+	 * 
 	 * @return une chaine de caratere referencant une page xhtml client
 	 */
 	public String update() {
-		
+
+		System.out.println("appel mise a jour client");
+		serviceClient.createOrUpdate(selectedClient);
 		addMessage("Mise a jour client effectuée");
 		return "client";
 	}
-	
+
+	/**
+	 * Methode de creation d'un nouveau client
+	 * 
+	 * @return une chaine de caratere referencant une page xhtml client
+	 */
+	public String create() {
+		System.out.println("appel create client");
+		System.out.println("nouveau client :" + nouveauClient);
+		serviceClient.createOrUpdate(nouveauClient);
+		addMessage("Ajout client effectué");
+		return "client";
+	}
+
 	/**
 	 * Méthode de redirection vers la page de gestion de comptes
+	 * 
 	 * @return une chaine de caratere referencant une page xhtml comptes
 	 */
 	public String afficherComptes() {
@@ -89,29 +99,32 @@ public class ClientBean implements Serializable {
 			addMessage("Erreur : pas de client selectionné!");
 		return "client";
 	}
-	
+
 	/**
 	 * Methode de supression d'un client en base
+	 * 
 	 * @return une chaine de caratere referencant la page xhtml client (maj)
 	 */
-	public String delete()
-	{
+	public String delete() {
 		addMessage("Supression client effectuée");
 		clientList.remove(selectedClient);
 		return "client";
 	}
-	
+
 	/**
-	 * Methode d'affichage de notifications 
-	 * @param summary le message a emettre
+	 * Methode d'affichage de notifications
+	 * 
+	 * @param summary
+	 *            le message a emettre
 	 */
 	public void addMessage(String summary) {
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, null);
 		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
-	
+
 	/**
 	 * getter de l'attribut selectedClient
+	 * 
 	 * @return
 	 */
 	public Client getSelectedClient() {
@@ -120,6 +133,7 @@ public class ClientBean implements Serializable {
 
 	/**
 	 * setter de l'attribut selectedClient
+	 * 
 	 * @param selectedClient
 	 */
 	public void setSelectedClient(Client selectedClient) {
@@ -127,7 +141,9 @@ public class ClientBean implements Serializable {
 	}
 
 	/**
-	 * getter de l'attribut clientList appel le service d'acces à la couche de persistence
+	 * getter de l'attribut clientList appel le service d'acces à la couche de
+	 * persistence
+	 * 
 	 * @return la liste des clients en base
 	 */
 	public ArrayList<Client> getClientList() {
@@ -136,16 +152,35 @@ public class ClientBean implements Serializable {
 
 	/**
 	 * setter de l'attribut clientList
+	 * 
 	 * @param clientList
 	 */
 	public void setClientList(ArrayList<Client> clientList) {
 		this.clientList = clientList;
 	}
 
+	public Client getNouveauClient() {
+		return nouveauClient;
+	}
+
+	public void setNouveauClient(Client nouveauClient) {
+		this.nouveauClient = nouveauClient;
+	}
+
+	public IServiceClient getServiceClient() {
+		return serviceClient;
+	}
+
+	public void setServiceClient(IServiceClient serviceClient) {
+		this.serviceClient = serviceClient;
+	}
 
 	/**
-	 * Methode permettant de detecter la selection d'une ligne client en table dans la vue client
-	 * @param event l evenement selection
+	 * Methode permettant de detecter la selection d'une ligne client en table
+	 * dans la vue client
+	 * 
+	 * @param event
+	 *            l evenement selection
 	 */
 	public void onClientSelect(SelectEvent event) {
 		this.selectedClient = (Client) event.getObject();
@@ -153,19 +188,23 @@ public class ClientBean implements Serializable {
 	}
 
 	/**
-	 * Methode permettant de detecter la deselection d'une ligne client en table dans la vue client
-	 * @param event l evenement deselection
+	 * Methode permettant de detecter la deselection d'une ligne client en table
+	 * dans la vue client
+	 * 
+	 * @param event
+	 *            l evenement deselection
 	 */
 	public void onClientUnselect(UnselectEvent event) {
 		System.out.println("unselect");
 		this.selectedClient = null;
 	}
-	
-//	/**
-//	 * Methode permettant de detecter la selection d'une ligne client en table dans la vue client
-//	 * @param event l evenement selection
-//	 */
-//	public void rowSelect(SelectEvent event) {
-//		this.selectedClient = (Client) event.getObject();
-//	}
+
+	// /**
+	// * Methode permettant de detecter la selection d'une ligne client en table
+	// dans la vue client
+	// * @param event l evenement selection
+	// */
+	// public void rowSelect(SelectEvent event) {
+	// this.selectedClient = (Client) event.getObject();
+	// }
 }

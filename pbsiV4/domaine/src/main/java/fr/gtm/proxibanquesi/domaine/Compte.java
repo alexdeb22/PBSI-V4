@@ -1,5 +1,7 @@
 package fr.gtm.proxibanquesi.domaine;
 
+
+
 import java.util.Date;
 
 import javax.persistence.DiscriminatorColumn;
@@ -9,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
@@ -25,7 +28,8 @@ public abstract class Compte {
 	// Propriétés
 	/** Numéro du compte */
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@SequenceGenerator(name="compteSeq", sequenceName="SEQ_COMPTE", allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="compteSeq")
 	private Integer numCompte;
 	/** Solde du compte */
 	private double solde;
