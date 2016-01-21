@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
+import javax.persistence.SequenceGenerator;
 
 import org.springframework.stereotype.Component;
 
@@ -23,7 +24,8 @@ public abstract class Employe {
 	 * Numero d'identification
 	 */
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@SequenceGenerator(name="employeSeq", sequenceName="SEQ_EMPLOYE", allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="employeSeq")
 	private Integer id;
 	/**
 	 * Nom de famille.
