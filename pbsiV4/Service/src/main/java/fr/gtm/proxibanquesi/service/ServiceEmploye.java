@@ -21,4 +21,12 @@ public class ServiceEmploye implements IServiceEmploye {
 		return dao.findByLoginAndMdp(login, mdp);
 	}
 
+	public void createOrUpdate(Employe employe) {
+		dao.save(employe);
+	}
+
+	public Employe findOne(Integer id) {
+		return dao.findOne(id);
+	}
+
 }

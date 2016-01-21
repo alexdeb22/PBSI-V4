@@ -2,6 +2,7 @@ package fr.gtm.proxibanquesi.front.beans;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import fr.gtm.proxibanquesi.domaine.Client;
 import fr.gtm.proxibanquesi.domaine.Conseiller;
 import fr.gtm.proxibanquesi.domaine.Employe;
 import fr.gtm.proxibanquesi.domaine.Gerant;
@@ -24,6 +26,8 @@ public class LoginBean {
 	
 	private Employe employe;
 	
+	private Client nouveauClient;
+	
 	@Autowired
 	private IServiceEmploye serv;
 	
@@ -34,6 +38,7 @@ public class LoginBean {
 	public void initBean() {
 		System.out.println("Creation bean login");
 		employe = new Conseiller();
+		nouveauClient = new Client();
 		System.out.println("Employe : " + employe);
 	}
 	
@@ -50,10 +55,6 @@ public class LoginBean {
 	}
 
 	public Employe getEmploye() {
-//		if (serv.findByLoginAndMdp(employe.getLogin(), employe.getMdp()) != null) {
-//			employe = serv.findByLoginAndMdp(employe.getLogin(), employe.getMdp());
-//			System.out.println("Auth");
-//		}
 		return employe;
 	}
 
@@ -67,6 +68,14 @@ public class LoginBean {
 
 	public void setServ(IServiceEmploye serv) {
 		this.serv = serv;
+	}
+
+	public Client getNouveauClient() {
+		return nouveauClient;
+	}
+
+	public void setNouveauClient(Client nouveauClient) {
+		this.nouveauClient = nouveauClient;
 	}
 
 	public String authentification() {
@@ -97,5 +106,20 @@ public class LoginBean {
 			return "/faces/erreur.xhtml";
 		}
 		return "/faces/accueil.xhtml";
+	}
+	
+	public String create() {
+		System.out.println("appel create client");
+		System.out.println("nouveau client :" + nouveauClient);
+		((Conseiller) employe).getListeClients().add(nouveauClient);
+		serv.createOrUpdate(employe);
+		employe = serv.findOne(employe.getId());
+		addMessage("Ajout client effectué");
+		return "/faces/cons/client.xhtml";
+	}
+	
+	public void addMessage(String summary) {
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, null);
+		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 }
