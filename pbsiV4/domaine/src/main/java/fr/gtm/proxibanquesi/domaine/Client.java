@@ -2,6 +2,7 @@ package fr.gtm.proxibanquesi.domaine;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -59,7 +60,7 @@ public class Client {
 	 * Adresse email du client.
 	 */
 	private String email;
-	@OneToMany(fetch=FetchType.EAGER)
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	private List<Compte> listeComptes;
 	
 
