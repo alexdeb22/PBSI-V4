@@ -43,9 +43,9 @@
 			<p:contextMenu for="dataClient">
 				<p:menuitem value="Gestion Comptes" update="form2"
 					icon="ui-icon-gear" action="#{clientBean.afficherComptes}" />
-				<p:menuitem value="Update" update="form2" icon="ui-icon-pencil"
+				<p:menuitem value="Modifier" update="form2" icon="ui-icon-pencil"
 					oncomplete="PF('updateDialog').show()" />
-				<p:menuitem value="Delete" update="panelclient" icon="ui-icon-close"
+				<p:menuitem value="Supprimer" update="panelclient" icon="ui-icon-close"
 					actionListener="#{loginBean.delete}" />
 			</p:contextMenu>
 
@@ -130,7 +130,9 @@
 						</p:inputText>
 					<p:outputLabel for="email" value="Email :" />
 					<p:inputText id="email" value="#{clientBean.selectedClient.email}"
-						required="true" />
+						required="true" >
+						<f:validator validatorId="emailValidator" />
+					</p:inputText>
 					<p:commandButton type="submit" value="Update" update="panelclient"
 						action="#{clientBean.update}" icon="ui-icon-check"
 						styleClass="ui-priority-primary" />
