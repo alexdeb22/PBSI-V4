@@ -86,6 +86,16 @@ public class LoginBean {
 			return "/faces/ger/cons.xhtml";
 		}
 		return "/faces/erreur.xhtml";
-		
+	}
+	
+	public String logout() {
+		employe = new Conseiller();
+		try {
+			((HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest()).logout();
+		} catch (ServletException e) {
+			e.printStackTrace();
+			return "/faces/erreur.xhtml";
+		}
+		return "/faces/accueil.xhtml";
 	}
 }
