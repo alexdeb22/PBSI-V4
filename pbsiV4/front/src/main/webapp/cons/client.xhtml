@@ -150,13 +150,21 @@
 						required="true" />
 					<p:outputLabel for="codepostal" value="Codepostal :" />
 					<p:inputText id="codepostal"
-						value="#{clientBean.nouveauClient.codePostal}" required="true" />
+						value="#{clientBean.nouveauClient.codePostal}" required="true" >
+						<f:validateRegex pattern="^[+]?[0-9]+$" />
+						<f:validateLength minimum="5" maximum="5"/>
+					</p:inputText>
 					<p:outputLabel for="telephone" value="Tel :" />
 					<p:inputText id="telephone"
-						value="#{clientBean.nouveauClient.telephone}" required="true" />
+						value="#{clientBean.nouveauClient.telephone}" required="true">
+							<f:validateRegex pattern="^[+]?[0-9]+$" />
+							<f:validateLength minimum="10" maximum="10"/>
+					</p:inputText>
 					<p:outputLabel for="email" value="Email :" />
 					<p:inputText id="email" value="#{clientBean.nouveauClient.email}"
-						required="true" />
+						required="true">
+						<f:validator validatorId="emailValidator" />
+					</p:inputText>
 					<p:commandButton type="submit" value="Ajouter" update="panelclient"
 						action="#{clientBean.create}" icon="ui-icon-check"
 						styleClass="ui-priority-primary" />
