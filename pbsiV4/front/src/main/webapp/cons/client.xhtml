@@ -46,7 +46,7 @@
 				<p:menuitem value="Update" update="form2" icon="ui-icon-pencil"
 					oncomplete="PF('updateDialog').show()" />
 				<p:menuitem value="Delete" update="panelclient" icon="ui-icon-close"
-					actionListener="#{clientBean.delete}" />
+					actionListener="#{loginBean.delete}" />
 			</p:contextMenu>
 
 			
@@ -116,10 +116,18 @@
 						required="true" />
 					<p:outputLabel for="codepostal" value="Codepostal :" />
 					<p:inputText id="codepostal"
-						value="#{clientBean.selectedClient.codePostal}" required="true" />
+						value="#{clientBean.selectedClient.codePostal}" required="true" 
+						validatorMessage="Code Postal invalide : doit contenir 5 chiffres">
+						<f:validateRegex pattern="^[+]?[0-9]+$" />
+						<f:validateLength minimum="5" maximum="5" />						
+					</p:inputText>
 					<p:outputLabel for="telephone" value="Tel :" />
 					<p:inputText id="telephone"
-						value="#{clientBean.selectedClient.telephone}" required="true" />
+						value="#{clientBean.selectedClient.telephone}" required="true" 
+						validatorMessage="Téléphone invalide : doit contenir 10 chiffres">
+						<f:validateRegex pattern="^[+]?[0-9]+$" />
+						<f:validateLength minimum="10" maximum="10" />
+						</p:inputText>
 					<p:outputLabel for="email" value="Email :" />
 					<p:inputText id="email" value="#{clientBean.selectedClient.email}"
 						required="true" />
@@ -148,15 +156,17 @@
 					<p:outputLabel for="ville" value="Ville :" />
 					<p:inputText id="ville" value="#{loginBean.nouveauClient.ville}"
 						required="true" />
-					<p:outputLabel for="codepostal" value="Codepostal :" />
+					<p:outputLabel for="codepostal" value="Code postal :" />
 					<p:inputText id="codepostal"
-						value="#{loginBean.nouveauClient.codePostal}" required="true" >
+						value="#{loginBean.nouveauClient.codePostal}" required="true" 
+						validatorMessage="Code Postal invalide : doit contenir 5 chiffres">
 						<f:validateRegex pattern="^[+]?[0-9]+$" />
 						<f:validateLength minimum="5" maximum="5" />
 						</p:inputText>
 					<p:outputLabel for="telephone" value="Tel :" />
 					<p:inputText id="telephone"
-						value="#{loginBean.nouveauClient.telephone}" required="true">
+						value="#{loginBean.nouveauClient.telephone}" required="true" 
+						validatorMessage="Téléphone invalide : doit contenir 10 chiffres">
 						<f:validateRegex pattern="^[+]?[0-9]+$" />
 						<f:validateLength minimum="10" maximum="10" />
 						</p:inputText>
