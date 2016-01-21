@@ -10,7 +10,7 @@
 
 	<validator>
 		<validator-id>emailValidator</validator-id>
-		<validator-class>net.viralpatel.jsf.helloworld.EmailValidator</validator-class>
+		<validator-class>fr.gtm.proxibanquesi.front.validator.EmailValidator</validator-class>
 	</validator>
 
 </faces-config>
