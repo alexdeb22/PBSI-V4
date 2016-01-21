@@ -83,6 +83,7 @@ public class ClientBean implements Serializable {
 		System.out.println("appel create client");
 		System.out.println("nouveau client :" + nouveauClient);
 		serviceClient.createOrUpdate(nouveauClient);
+		clientList.add(nouveauClient);
 		addMessage("Ajout client effectué");
 		return "client";
 	}
@@ -106,6 +107,7 @@ public class ClientBean implements Serializable {
 	 * @return une chaine de caratere referencant la page xhtml client (maj)
 	 */
 	public String delete() {
+		serviceClient.delete(selectedClient);
 		addMessage("Supression client effectuée");
 		clientList.remove(selectedClient);
 		return "client";

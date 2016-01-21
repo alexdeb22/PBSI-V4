@@ -11,11 +11,9 @@
 
 <h:body>
 
-	<f:facet name="last">
-<!-- 		<h:outputStylesheet name="custom.css" library="css" /> -->
-	</f:facet>
-
-	
+<f:facet name="last">
+<h:outputStylesheet name="custom.css" library="css" />
+</f:facet>
 
 	<p:panel style="background:#F2F7F9;">
 		<h:outputText value="ProxiBankV4 - Intranet" />
@@ -32,7 +30,6 @@
 	</p:menubar>
 	</h:form>
 
-	
 
 	<h3 class="title ui-widget-header ui-corner-all">
 	Liste des clients
@@ -41,8 +38,8 @@
 	<p:outputPanel id="panelclient">
 		<h:form id="form1">
 
-			
-
+			<p:commandButton  value="Ajout client" update="formAjoutClient" onclick="PF('createClientDialog').show()" icon="ui-icon-circle-plus" />
+		
 			<p:contextMenu for="dataClient">
 				<p:menuitem value="Gestion Comptes" update="form2"
 					icon="ui-icon-gear" action="#{clientBean.afficherComptes}" />
@@ -51,6 +48,8 @@
 				<p:menuitem value="Delete" update="panelclient" icon="ui-icon-close"
 					actionListener="#{clientBean.delete}" />
 			</p:contextMenu>
+
+			
 
 			<p:dataTable id="dataClient" var="cli"
 				value="#{loginBean.employe.listeClients}"
@@ -126,6 +125,40 @@
 						required="true" />
 					<p:commandButton type="submit" value="Update" update="panelclient"
 						action="#{clientBean.update}" icon="ui-icon-check"
+						styleClass="ui-priority-primary" />
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+		
+		<p:dialog header="Ajout d'un client" widgetVar="createClientDialog"
+			modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+			<h:form id="formAjoutClient">
+
+				<p:growl id="growlAjout" life="2000" />
+				<h:panelGrid id="grid2" columns="2" cellpadding="5">
+					<p:outputLabel for="nom" value="Nom :" />
+					<p:inputText id="nom" value="#{clientBean.nouveauClient.nom}"
+						required="true" />
+					<p:outputLabel for="prenom" value="Prenom :" />
+					<p:inputText id="prenom"
+						value="#{clientBean.nouveauClient.prenom}" required="true" />
+					<p:outputLabel for="adresse" value="Adresse :" />
+					<p:inputText id="adresse"
+						value="#{clientBean.nouveauClient.adresse}" required="true" />
+					<p:outputLabel for="ville" value="Ville :" />
+					<p:inputText id="ville" value="#{clientBean.nouveauClient.ville}"
+						required="true" />
+					<p:outputLabel for="codepostal" value="Codepostal :" />
+					<p:inputText id="codepostal"
+						value="#{clientBean.nouveauClient.codePostal}" required="true" />
+					<p:outputLabel for="telephone" value="Tel :" />
+					<p:inputText id="telephone"
+						value="#{clientBean.nouveauClient.telephone}" required="true" />
+					<p:outputLabel for="email" value="Email :" />
+					<p:inputText id="email" value="#{clientBean.nouveauClient.email}"
+						required="true" />
+					<p:commandButton type="submit" value="Ajouter" update="panelclient"
+						action="#{clientBean.create}" icon="ui-icon-check"
 						styleClass="ui-priority-primary" />
 				</h:panelGrid>
 			</h:form>
