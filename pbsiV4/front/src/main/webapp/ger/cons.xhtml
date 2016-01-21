@@ -27,7 +27,7 @@
 		<p:menuitem value="Clients" url="client.xhtml" />
 		<p:menuitem value="Comptes" url="compte.xhtml" />
 		<f:facet name="options">
-			<p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
+			<p:commandButton type="submit" value="Logout" action="#{loginBean.logout}" icon="ui-icon-extlink" />
 		</f:facet>
 	</p:menubar>
 	</h:form>

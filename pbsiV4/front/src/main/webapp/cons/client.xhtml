@@ -22,10 +22,10 @@
 
 	<h:form id="navform">
 	<p:menubar>
-		<p:menuitem value="Clients" url="client.xhtml" />
-		<p:menuitem value="Comptes" url="compte.xhtml" />
+		<p:menuitem value="Clients" url="/cons/client.xhtml" />
+		<p:menuitem value="Comptes" url="/cons/compte.xhtml" />
 		<f:facet name="options">
-			<p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
+			<p:commandButton type="submit" value="Logout" action="#{loginBean.logout}" icon="ui-icon-extlink" />
 		</f:facet>
 	</p:menubar>
 	</h:form>
@@ -137,36 +137,36 @@
 				<p:growl id="growlAjout" life="2000" />
 				<h:panelGrid id="grid2" columns="2" cellpadding="5">
 					<p:outputLabel for="nom" value="Nom :" />
-					<p:inputText id="nom" value="#{clientBean.nouveauClient.nom}"
+					<p:inputText id="nom" value="#{loginBean.nouveauClient.nom}"
 						required="true" />
 					<p:outputLabel for="prenom" value="Prenom :" />
 					<p:inputText id="prenom"
-						value="#{clientBean.nouveauClient.prenom}" required="true" />
+						value="#{loginBean.nouveauClient.prenom}" required="true" />
 					<p:outputLabel for="adresse" value="Adresse :" />
 					<p:inputText id="adresse"
-						value="#{clientBean.nouveauClient.adresse}" required="true" />
+						value="#{loginBean.nouveauClient.adresse}" required="true" />
 					<p:outputLabel for="ville" value="Ville :" />
-					<p:inputText id="ville" value="#{clientBean.nouveauClient.ville}"
+					<p:inputText id="ville" value="#{loginBean.nouveauClient.ville}"
 						required="true" />
 					<p:outputLabel for="codepostal" value="Codepostal :" />
 					<p:inputText id="codepostal"
-						value="#{clientBean.nouveauClient.codePostal}" required="true" >
-						<f:validateRegex pattern="^[+]?[0-9]+$" />
-						<f:validateLength minimum="5" maximum="5"/>
-					</p:inputText>
+						value="#{loginBean.nouveauClient.codePostal}" required="true" >
+						<f:validateRegex pattern="^[+]?{}[0-9]+$" />
+						<f:validateLength minimum="5" maximum="5" />
+						</p:inputText>
 					<p:outputLabel for="telephone" value="Tel :" />
 					<p:inputText id="telephone"
-						value="#{clientBean.nouveauClient.telephone}" required="true">
-							<f:validateRegex pattern="^[+]?[0-9]+$" />
-							<f:validateLength minimum="10" maximum="10"/>
-					</p:inputText>
+						value="#{loginBean.nouveauClient.telephone}" required="true">
+						<f:validateRegex pattern="^[+]?{}[0-9]+$" />
+						<f:validateLength minimum="10" maximum="10" />
+						</p:inputText>
 					<p:outputLabel for="email" value="Email :" />
-					<p:inputText id="email" value="#{clientBean.nouveauClient.email}"
+					<p:inputText id="email" value="#{loginBean.nouveauClient.email}"
 						required="true">
 						<f:validator validatorId="emailValidator" />
-					</p:inputText>
+						</p:inputText>
 					<p:commandButton type="submit" value="Ajouter" update="panelclient"
-						action="#{clientBean.create}" icon="ui-icon-check"
+						action="#{loginBean.create}" icon="ui-icon-check"
 						styleClass="ui-priority-primary" />
 				</h:panelGrid>
 			</h:form>
