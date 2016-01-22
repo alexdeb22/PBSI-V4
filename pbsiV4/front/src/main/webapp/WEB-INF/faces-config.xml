@@ -12,9 +12,5 @@
 		<validator-id>emailValidator</validator-id>
 		<validator-class>fr.gtm.proxibanquesi.front.validator.EmailValidator</validator-class>
 	</validator>
-	<validator>
-		<validator-id>virementValidator</validator-id>
-		<validator-class>fr.gtm.proxibanquesi.front.validator.VirementValidator</validator-class>
-	</validator>
 
 </faces-config>

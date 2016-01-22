@@ -129,7 +129,6 @@
 					<p:outputLabel for="montant" value="Montant:" />
 					<p:inputText id="montant" value="#{compteBean.montant}" required="true">
 					<f:validateDoubleRange minimum="0.0"/>
-					<f:validator validatorId="virementValidator" />
 					</p:inputText>
 					<p:commandButton type="submit" value="Virer" update="form5"
 						actionListener="#{compteBean.virement}" />
@@ -156,7 +155,6 @@
 					<p:outputLabel for="montant" value="Montant:" />
 					<p:inputText id="montant" value="#{compteBean.montant}" required="true">
 					<f:validateDoubleRange minimum="0.0"/>
-					<f:validator validatorId="virementValidator" />
 					</p:inputText>
 					<p:commandButton type="submit" value="Virer" update="form6"
 						actionListener="#{compteBean.virementExterne}" />

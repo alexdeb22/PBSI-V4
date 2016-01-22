@@ -104,33 +104,33 @@
 				<h:panelGrid id="grid2" columns="2" cellpadding="5">
 					<p:outputLabel for="nom" value="Nom :" />
 					<p:inputText id="nom" value="#{clientBean.selectedClient.nom}"
-						required="true" />
+						required="true" requiredMessage="Vous n'avez pas saisi le nom du client"/>
 					<p:outputLabel for="prenom" value="Prenom :" />
 					<p:inputText id="prenom"
-						value="#{clientBean.selectedClient.prenom}" required="true" />
+						value="#{clientBean.selectedClient.prenom}" required="true" requiredMessage="Vous n'avez pas saisi le prénom du client"/>
 					<p:outputLabel for="adresse" value="Adresse :" />
 					<p:inputText id="adresse"
-						value="#{clientBean.selectedClient.adresse}" required="true" />
+						value="#{clientBean.selectedClient.adresse}" required="true" requiredMessage="Vous n'avez pas saisi l'adresse du client"/>
 					<p:outputLabel for="ville" value="Ville :" />
 					<p:inputText id="ville" value="#{clientBean.selectedClient.ville}"
 						required="true" />
 					<p:outputLabel for="codepostal" value="Codepostal :" />
 					<p:inputText id="codepostal"
-						value="#{clientBean.selectedClient.codePostal}" required="true" 
+						value="#{clientBean.selectedClient.codePostal}" required="true" requiredMessage="Vous n'avez pas saisi le code postal du client"
 						validatorMessage="Code Postal invalide : doit contenir 5 chiffres">
 						<f:validateRegex pattern="^[+]?[0-9]+$" />
 						<f:validateLength minimum="5" maximum="5" />						
 					</p:inputText>
 					<p:outputLabel for="telephone" value="Tel :" />
 					<p:inputText id="telephone"
-						value="#{clientBean.selectedClient.telephone}" required="true" 
+						value="#{clientBean.selectedClient.telephone}" required="true" requiredMessage="Vous n'avez pas saisi le téléphone du client"
 						validatorMessage="Téléphone invalide : doit contenir 10 chiffres">
 						<f:validateRegex pattern="^[+]?[0-9]+$" />
 						<f:validateLength minimum="10" maximum="10" />
 						</p:inputText>
 					<p:outputLabel for="email" value="Email :" />
 					<p:inputText id="email" value="#{clientBean.selectedClient.email}"
-						required="true" >
+						required="true" requiredMessage="Vous n'avez pas saisi l'e-mail du client">
 						<f:validator validatorId="emailValidator" />
 					</p:inputText>
 					<p:commandButton type="submit" value="Update" update="panelclient"
@@ -148,33 +148,33 @@
 				<h:panelGrid id="grid2" columns="2" cellpadding="5">
 					<p:outputLabel for="nom" value="Nom :" />
 					<p:inputText id="nom" value="#{loginBean.nouveauClient.nom}"
-						required="true" />
+						required="true" requiredMessage="Vous n'avez pas saisi le nom du client"/>
 					<p:outputLabel for="prenom" value="Prenom :" />
 					<p:inputText id="prenom"
-						value="#{loginBean.nouveauClient.prenom}" required="true" />
+						value="#{loginBean.nouveauClient.prenom}" required="true" requiredMessage="Vous n'avez pas saisi le prénom du client"/>
 					<p:outputLabel for="adresse" value="Adresse :" />
 					<p:inputText id="adresse"
-						value="#{loginBean.nouveauClient.adresse}" required="true" />
+						value="#{loginBean.nouveauClient.adresse}" required="true" requiredMessage="Vous n'avez pas saisi l'adresse du client"/>
 					<p:outputLabel for="ville" value="Ville :" />
 					<p:inputText id="ville" value="#{loginBean.nouveauClient.ville}"
 						required="true" />
 					<p:outputLabel for="codepostal" value="Code postal :" />
 					<p:inputText id="codepostal"
-						value="#{loginBean.nouveauClient.codePostal}" required="true" 
+						value="#{loginBean.nouveauClient.codePostal}" required="true" requiredMessage="Vous n'avez pas saisi le code postal du client"
 						validatorMessage="Code Postal invalide : doit contenir 5 chiffres">
 						<f:validateRegex pattern="^[+]?[0-9]+$" />
 						<f:validateLength minimum="5" maximum="5" />
 						</p:inputText>
 					<p:outputLabel for="telephone" value="Tel :" />
 					<p:inputText id="telephone"
-						value="#{loginBean.nouveauClient.telephone}" required="true" 
+						value="#{loginBean.nouveauClient.telephone}" required="true" requiredMessage="Vous n'avez pas saisi le téléphone du client"
 						validatorMessage="Téléphone invalide : doit contenir 10 chiffres">
 						<f:validateRegex pattern="^[+]?[0-9]+$" />
 						<f:validateLength minimum="10" maximum="10" />
 						</p:inputText>
 					<p:outputLabel for="email" value="Email :" />
 					<p:inputText id="email" value="#{loginBean.nouveauClient.email}"
-						required="true">
+						required="true" requiredMessage="Vous n'avez pas saisi l'e-mail du client">
 						<f:validator validatorId="emailValidator" />
 						</p:inputText>
 					<p:commandButton type="submit" value="Ajouter" update="panelclient"
