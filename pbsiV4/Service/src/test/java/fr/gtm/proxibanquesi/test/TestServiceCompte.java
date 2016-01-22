@@ -1,6 +1,8 @@
 package fr.gtm.proxibanquesi.test;
 
 
+import static org.junit.Assert.*;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -11,6 +13,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import fr.gtm.proxibanquesi.dao.IDaoCompte;
 import fr.gtm.proxibanquesi.domaine.CompteCourant;
+import fr.gtm.proxibanquesi.exceptions.SoldeException;
 import fr.gtm.proxibanquesi.service.ServiceClient;
 import fr.gtm.proxibanquesi.service.ServiceCompte;
 
@@ -46,7 +49,12 @@ public class TestServiceCompte {
 	public void testCallVirementIntra() {
 		CompteCourant cDeb = new CompteCourant(500);
 		CompteCourant cCre = new CompteCourant(200);
-		ser.virementIntraClient(cDeb, cCre, 200);
+		try {
+			ser.virementIntraClient(cDeb, cCre, 200);
+		} catch (SoldeException e) {
+			e.getMessage();
+			fail();
+		}
 		Mockito.verify(dao).save(cCre);
 		Mockito.verify(dao).save(cDeb);
 	}
@@ -55,7 +63,12 @@ public class TestServiceCompte {
 	public void testTestVirement() {
 		CompteCourant cDeb = new CompteCourant(500);
 		CompteCourant cCre = new CompteCourant(200);
-		ser.virementIntraClient(cDeb, cCre, 2000);
+		try {
+			ser.virementIntraClient(cDeb, cCre, 2000);
+		} catch (SoldeException e) {
+			e.getMessage();
+			fail();
+		}
 		Mockito.verify(dao, Mockito.times(0)).save(cCre);
 		Mockito.verify(dao, Mockito.times(0)).save(cDeb);
 	}
@@ -66,7 +79,12 @@ public class TestServiceCompte {
 		ServiceCompte ser2 = (ServiceCompte) context.getBean("serviceCompte");
 		System.out.println("Avant : "+ser2.findOne(1).getSolde());
 		System.out.println("Avant : "+ser2.findOne(2).getSolde());
-		ser2.virementIntraClient(ser2.findOne(1), ser2.findOne(2), 20);
+		try {
+			ser2.virementIntraClient(ser2.findOne(1), ser2.findOne(2), 20);
+		} catch (SoldeException e) {
+			e.getMessage();
+			fail();
+		}
 		System.out.println("Après : "+ser2.findOne(1).getSolde());
 		System.out.println("Après : "+ser2.findOne(2).getSolde());
 	}
@@ -77,7 +95,12 @@ public class TestServiceCompte {
 		ServiceCompte ser2 = (ServiceCompte) context.getBean("serviceCompte");
 		System.out.println("Avant : "+ser2.findOne(1).getSolde());
 		System.out.println("Avant : "+ser2.findOne(3).getSolde());
-		ser2.virementInterClient(ser2.findOne(1), 3, 20);
+		try {
+			ser2.virementInterClient(ser2.findOne(1), 3, 20);
+		} catch (SoldeException e) {
+			e.getMessage();
+			fail();
+		}
 		System.out.println("Après : "+ser2.findOne(1).getSolde());
 		System.out.println("Après : "+ser2.findOne(3).getSolde());
 	}

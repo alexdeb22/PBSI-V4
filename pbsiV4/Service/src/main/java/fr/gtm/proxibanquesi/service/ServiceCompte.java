@@ -9,6 +9,7 @@ import fr.gtm.proxibanquesi.dao.IDaoCompte;
 import fr.gtm.proxibanquesi.domaine.Compte;
 import fr.gtm.proxibanquesi.domaine.CompteCourant;
 import fr.gtm.proxibanquesi.domaine.CompteEpargne;
+import fr.gtm.proxibanquesi.exceptions.SoldeException;
 
 /**
  * Classe ServiceCompte. Elle implémente IServiceCompte Elle implémente les
@@ -60,14 +61,14 @@ public class ServiceCompte implements IServiceCompte {
 		this.dao = dao;
 	}
 
-	public void virementIntraClient(Compte cDeb, Compte cCre, double montant) {
+	public void virementIntraClient(Compte cDeb, Compte cCre, double montant) throws SoldeException {
 		if (cDeb instanceof CompteEpargne && cDeb.getSolde() >= montant || cDeb instanceof CompteCourant && cDeb.getSolde()+ ((CompteCourant)cDeb).getAutorisationDecouvert() >= montant) {
 			cDeb.setSolde(cDeb.getSolde()-montant);
 			cCre.setSolde(cCre.getSolde()+montant);
 			dao.save(cDeb);
 			dao.save(cCre);
 		} else {
-//			throw new exception;
+			throw new SoldeException();
 		}
 		
 	}
@@ -81,7 +82,7 @@ public class ServiceCompte implements IServiceCompte {
 	}
 
 
-	public void virementInterClient(Compte cDeb, Integer numCompteCre, double montant) {
+	public void virementInterClient(Compte cDeb, Integer numCompteCre, double montant) throws SoldeException {
 		Compte cCre = dao.findOne(numCompteCre);
 		if (cDeb instanceof CompteEpargne && cDeb.getSolde() >= montant || cDeb instanceof CompteCourant && cDeb.getSolde()+ ((CompteCourant)cDeb).getAutorisationDecouvert() >= montant) {
 			cDeb.setSolde(cDeb.getSolde()-montant);
@@ -89,7 +90,7 @@ public class ServiceCompte implements IServiceCompte {
 			dao.save(cDeb);
 			dao.save(cCre);
 		} else {
-//			throw new exception;
+			throw new SoldeException();
 		}
 	}
 
