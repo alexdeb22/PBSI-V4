@@ -3,6 +3,8 @@ package fr.gtm.proxibanquesi.service;
 import java.util.List;
 
 import fr.gtm.proxibanquesi.domaine.Compte;
+import fr.gtm.proxibanquesi.exceptions.CompteInexistantException;
+import fr.gtm.proxibanquesi.exceptions.SoldeException;
 
 /**
  * Interface ServiceCompte. Elle liste les méthodes CRUD d'un compte et une méthode qui retourne la liste de tous les comptes
@@ -37,6 +39,7 @@ public interface IServiceCompte {
 	 * @param montant : montant du virement à effectuer
 	 */
 	public void virementInterClient(Compte cDeb, Integer numCompteCre, double montant);
+	
 	
 	/**
 	 * Méthode qui crée un compte en base de données

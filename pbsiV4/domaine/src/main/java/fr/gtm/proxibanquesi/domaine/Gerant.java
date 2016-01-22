@@ -2,6 +2,7 @@ package fr.gtm.proxibanquesi.domaine;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,7 +18,7 @@ public class Gerant extends Employe {
 	/**
 	 * Liste des clients a la charge du conseiller.
 	 */
-	@OneToMany(fetch=FetchType.EAGER)
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	private List<Conseiller> listeConseillers;
 	
 	/**

@@ -2,6 +2,7 @@ package fr.gtm.proxibanquesi.front.beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -18,8 +19,12 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import fr.gtm.proxibanquesi.domaine.Compte;
+import fr.gtm.proxibanquesi.domaine.CompteCourant;
+import fr.gtm.proxibanquesi.domaine.CompteEpargne;
+import fr.gtm.proxibanquesi.exceptions.CompteInexistantException;
+import fr.gtm.proxibanquesi.exceptions.SoldeException;
+import fr.gtm.proxibanquesi.service.IServiceClient;
 import fr.gtm.proxibanquesi.service.IServiceCompte;
-
 
 @ManagedBean
 @Scope()
@@ -35,9 +40,17 @@ public class CompteBean implements Serializable {
 	private Compte destination;
 	private double montant;
 	private int idCompteExterneDestination;
-	
+	private CompteCourant nouveauCompteCourant;
+	private CompteEpargne nouveauCompteEpargne;
+	private String typeCompteACree;
+	private double option;
+	private double solde;
+
 	@Autowired
 	private IServiceCompte iservCompte;
+
+	@Autowired
+	private IServiceClient iservClient;
 
 	@Value("#{clientBean}")
 	private ClientBean ownerBean;
@@ -47,7 +60,9 @@ public class CompteBean implements Serializable {
 		System.out.println("Creation bean compte");
 		System.out.println("Owner= " + ownerBean.getSelectedClient());
 		selectedCompte = null;
-		destination=null;
+		destination = null;
+		nouveauCompteCourant = new CompteCourant();
+		nouveauCompteEpargne = new CompteEpargne();
 	}
 
 	@PreDestroy
@@ -77,8 +92,7 @@ public class CompteBean implements Serializable {
 				} else {
 					destination = compteList.get(0);
 				}
-			}
-			else {
+			} else {
 				addMessage("erreur type de compte inconnu");
 			}
 		} else {
@@ -97,23 +111,63 @@ public class CompteBean implements Serializable {
 
 	public String virement() {
 		System.out.println("appel virement compte");
-		iservCompte.virementIntraClient(selectedCompte, destination,montant);
+		try {
+			iservCompte.virementIntraClient(selectedCompte, destination, montant);
+		} catch (SoldeException e) {
+			addMessage(e.getMessage());
+			return "compte";
+		}
 		addMessage("Virement effectué");
 		return "compte";
 	}
-	
+
 	public void virementExterne() {
 		System.out.println("appel virement externe compte");
-		iservCompte.virementInterClient(selectedCompte, idCompteExterneDestination, montant);
-		addMessage("Virement effectué");
+		try {
+			iservCompte.virementInterClient(selectedCompte, idCompteExterneDestination, montant);
+			addMessage("Virement effectué");
+		} catch (SoldeException e) {
+			addMessage(e.getMessage());
+		} catch (CompteInexistantException e) {
+			addMessage(e.getMessage());
+		}
+
 	}
 
 	public String create() {
+		System.out.println("typeCompteACree : " + typeCompteACree);
+		System.out.println("option " + option);
+		compteList = ownerBean.getSelectedClient().getListeComptes();
+
+		if (typeCompteACree.equalsIgnoreCase("COURANT")) {
+			nouveauCompteCourant.setDateOuverture(new Date());
+			nouveauCompteCourant.setAutorisationDecouvert(option);
+			nouveauCompteCourant.setSolde(solde);
+
+			iservCompte.createOrUpdate(nouveauCompteCourant);
+			compteList.add(nouveauCompteCourant);
+			iservClient.createOrUpdate(ownerBean.getSelectedClient());
+
+		} else if (typeCompteACree.equalsIgnoreCase("EPARGNE")) {
+			nouveauCompteEpargne.setDateOuverture(new Date());
+			nouveauCompteEpargne.setTauxRemuneration(option);
+			nouveauCompteEpargne.setSolde(solde);
+			iservCompte.createOrUpdate(nouveauCompteEpargne);
+			compteList.add(nouveauCompteEpargne);
+			iservClient.createOrUpdate(ownerBean.getSelectedClient());
+		} else {
+			addMessage("erreur");
+		}
 		addMessage("Ajout compte effectué");
 		return "compte";
 	}
 
 	public String delete() {
+		compteList = ownerBean.getSelectedClient().getListeComptes();
+		compteList.remove(selectedCompte);
+		iservClient.createOrUpdate(ownerBean.getSelectedClient());
+		iservCompte.delete(selectedCompte);
+
 		addMessage("Supression de compte effectuée");
 		return "compte";
 	}
@@ -200,7 +254,53 @@ public class CompteBean implements Serializable {
 	public void setIservCompte(IServiceCompte iservCompte) {
 		this.iservCompte = iservCompte;
 	}
-	
-	
+
+	public CompteCourant getNouveauCompteCourant() {
+		return nouveauCompteCourant;
+	}
+
+	public void setNouveauCompteCourant(CompteCourant nouveauCompteCourant) {
+		this.nouveauCompteCourant = nouveauCompteCourant;
+	}
+
+	public CompteEpargne getNouveauCompteEpargne() {
+		return nouveauCompteEpargne;
+	}
+
+	public void setNouveauCompteEpargne(CompteEpargne nouveauCompteEpargne) {
+		this.nouveauCompteEpargne = nouveauCompteEpargne;
+	}
+
+	public String getTypeCompteACree() {
+		return typeCompteACree;
+	}
+
+	public void setTypeCompteACree(String typeCompteACree) {
+		this.typeCompteACree = typeCompteACree;
+	}
+
+	public double getOption() {
+		return option;
+	}
+
+	public double getSolde() {
+		return solde;
+	}
+
+	public void setSolde(double solde) {
+		this.solde = solde;
+	}
+
+	public IServiceClient getIservClient() {
+		return iservClient;
+	}
+
+	public void setIservClient(IServiceClient iservClient) {
+		this.iservClient = iservClient;
+	}
+
+	public void setOption(double option) {
+		this.option = option;
+	}
 
 }

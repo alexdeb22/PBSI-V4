@@ -90,18 +90,18 @@ public class ClientBean implements Serializable {
 		return "client";
 	}
 
-	/**
-	 * Méthode de redirection vers la page de gestion de comptes
-	 * 
-	 * @return une chaine de caratere referencant une page xhtml comptes
-	 */
-	public String afficherComptes() {
-		if (selectedClient != null)
-			return "compte";
-		else
-			addMessage("Erreur : pas de client selectionné!");
-		return "client";
-	}
+//	/**
+//	 * Méthode de redirection vers la page de gestion de comptes
+//	 * 
+//	 * @return une chaine de caratere referencant une page xhtml comptes
+//	 */
+//	public String afficherComptes() {
+//		if (selectedClient != null)
+//			return "compte";
+//		else
+//			addMessage("Erreur : pas de client selectionné!");
+//		return "client";
+//	}
 
 	/**
 	 * Methode de supression d'un client en base
