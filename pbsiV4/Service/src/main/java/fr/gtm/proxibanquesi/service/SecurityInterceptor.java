@@ -21,9 +21,16 @@ import fr.gtm.proxibanquesi.domaine.Transaction;
 @Aspect
 public class SecurityInterceptor {
 
+	/**
+	 * Interface IDAOTransaction injecté par Spring
+	 */
 	@Autowired
 	private IDaoTransaction dao;
 
+	
+	/**
+	 * Constructeur de SecurityInterceptor sans argument
+	 */
 	public SecurityInterceptor() {
 		super();
 		System.out.println("Interceptor cree");

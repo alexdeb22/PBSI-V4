@@ -1,17 +1,13 @@
 package fr.gtm.proxibanquesi.test;
 
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.gtm.proxibanquesi.dao.IDaoEmploye;
-import fr.gtm.proxibanquesi.domaine.Conseiller;
 import fr.gtm.proxibanquesi.domaine.Employe;
-import fr.gtm.proxibanquesi.domaine.Gerant;
 
 /**
  * Classe TestDaoEmploye qui permet de tester la méthode testFindAndMdp() de DaoEmploye
@@ -19,13 +15,13 @@ import fr.gtm.proxibanquesi.domaine.Gerant;
  */
 @Transactional
 public class TestDaoEmploye {
-	/** Interface IDAOEmploye  */
+	/** Interface IDAOEmploye */
 	private static IDaoEmploye dao;
-	/** Interface ApplicationContext  */
+	/** Interface ApplicationContext */
 	private static ApplicationContext context;
 
 	/**
-	 * Méthode se lancant avant tous les test permettant de charger la définition du contexte 
+	 * Méthode se lancant avant tous les tests permettant de charger la définition du contexte 
 	 * à partir d'un fichier XML contenu dans le classpath.
 	 * @throws Exception
 	 */
@@ -52,7 +48,7 @@ public class TestDaoEmploye {
 	
 	
 	/**
-	 * Méthode de test permettant de vérifier que le gérant, ayant pour login : ger et
+	 * Méthode permettant de tester la méthode testFindAndMdp(), en vérifiant que le gérant, ayant pour login : ger et
 	 * mot de passe : ger, se trouve dans la base de données.
 	 */
 	@Test
