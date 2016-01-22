@@ -37,7 +37,7 @@
 
 	<p:outputPanel id="panelcompte">
 		<h:form id="form3">
-
+			<p:growl id="growlContext" life="2000"/>
 			<p:contextMenu for="dataCompte">
 				<p:menuitem value="Virement interne" actionListener="#{compteBean.virementInit}" update="form5" icon="ui-icon-gear"
 					oncomplete="PF('virementDialog').show()" />
