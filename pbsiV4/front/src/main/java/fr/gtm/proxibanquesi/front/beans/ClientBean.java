@@ -1,7 +1,7 @@
 package fr.gtm.proxibanquesi.front.beans;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -37,11 +37,16 @@ public class ClientBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Client selectedClient;
 	private Client nouveauClient;
-	private ArrayList<Client> clientList;
+	private List<Client> clientList;
 
 	@Autowired
 	private IServiceClient serviceClient;
 	
+	@Autowired
+	private IServiceEmploye serviceEmploye;
+	
+	@Value("#{loginBean}")
+	private LoginBean ownerBean;
 
 	/**
 	 * Methode d'initialisation du bean
@@ -49,8 +54,8 @@ public class ClientBean implements Serializable {
 	@PostConstruct
 	public void initBean() {
 		System.out.println("Creation bean client");
-		clientList = (ArrayList<Client>) serviceClient.findAll();
 		nouveauClient = new Client();
+		selectedClient = null;
 	}
 
 	@PreDestroy
@@ -86,24 +91,27 @@ public class ClientBean implements Serializable {
 	public String create() {
 		System.out.println("appel create client");
 		System.out.println("nouveau client :" + nouveauClient);
+		Conseiller conseiller = (Conseiller) ownerBean.getEmploye();
+		clientList = (List<Client>) conseiller.getListeClients();
 		serviceClient.createOrUpdate(nouveauClient);
 		clientList.add(nouveauClient);
+		serviceEmploye.createOrUpdate(conseiller);
 		addMessage("Ajout client effectué");
 		return "client";
 	}
 
-//	/**
-//	 * Méthode de redirection vers la page de gestion de comptes
-//	 * 
-//	 * @return une chaine de caratere referencant une page xhtml comptes
-//	 */
-//	public String afficherComptes() {
-//		if (selectedClient != null)
-//			return "compte";
-//		else
-//			addMessage("Erreur : pas de client selectionné!");
-//		return "client";
-//	}
+	/**
+	 * Méthode de redirection vers la page de gestion de comptes
+	 * 
+	 * @return une chaine de caratere referencant une page xhtml comptes
+	 */
+	public String afficherComptes() {
+		if (selectedClient != null)
+			return "compte";
+		else
+			addMessage("Erreur : pas de client selectionné!");
+		return "client";
+	}
 
 	/**
 	 * Methode de supression d'un client en base
@@ -111,9 +119,15 @@ public class ClientBean implements Serializable {
 	 * @return une chaine de caratere referencant la page xhtml client (maj)
 	 */
 	public String delete() {
+		Conseiller conseiller = (Conseiller) ownerBean.getEmploye();
+		clientList = (List<Client>) conseiller.getListeClients();
+		System.out.println(clientList);
+		System.out.println(selectedClient);
+		System.out.println(clientList.remove(selectedClient));
+		System.out.println(clientList);
+		serviceEmploye.createOrUpdate(conseiller);
 		serviceClient.delete(selectedClient);
 		addMessage("Supression client effectuée");
-		clientList.remove(selectedClient);
 		return "client";
 	}
 
@@ -152,7 +166,7 @@ public class ClientBean implements Serializable {
 	 * 
 	 * @return la liste des clients en base
 	 */
-	public ArrayList<Client> getClientList() {
+	public List<Client> getClientList() {
 		return clientList;
 	}
 
@@ -161,7 +175,7 @@ public class ClientBean implements Serializable {
 	 * 
 	 * @param clientList
 	 */
-	public void setClientList(ArrayList<Client> clientList) {
+	public void setClientList(List<Client> clientList) {
 		this.clientList = clientList;
 	}
 

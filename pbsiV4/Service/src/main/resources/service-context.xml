@@ -15,4 +15,5 @@
 	<bean id="interceptor" class="fr.gtm.proxibanquesi.service.SecurityInterceptor" scope="prototype" />
 	<aop:aspectj-autoproxy />
 
+
 </beans>

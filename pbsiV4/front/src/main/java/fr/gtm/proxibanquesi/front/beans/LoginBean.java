@@ -55,9 +55,9 @@ public class LoginBean {
 	}
 
 	public Employe getEmploye() {
-		if(employe.getId() != null){
-			employe = serv.findOne(employe.getId());
-		}
+//		if(employe.getId() != null){
+//			employe = serv.findOne(employe.getId());
+//		}
 		return employe;
 	}
 

@@ -138,6 +138,7 @@ public class CompteBean implements Serializable {
 		System.out.println("typeCompteACree : " + typeCompteACree);
 		System.out.println("option " + option);
 		compteList = ownerBean.getSelectedClient().getListeComptes();
+		System.out.println(ownerBean.getSelectedClient().getListeComptes());
 
 		if (typeCompteACree.equalsIgnoreCase("COURANT")) {
 			nouveauCompteCourant.setDateOuverture(new Date());
@@ -159,17 +160,20 @@ public class CompteBean implements Serializable {
 			addMessage("erreur");
 		}
 		addMessage("Ajout compte effectué");
-		return "compte";
+		return "client";
 	}
 
 	public String delete() {
 		compteList = ownerBean.getSelectedClient().getListeComptes();
 		compteList.remove(selectedCompte);
+		System.out.println(compteList);
+		System.out.println(ownerBean.getSelectedClient().getListeComptes());
 		iservClient.createOrUpdate(ownerBean.getSelectedClient());
 		iservCompte.delete(selectedCompte);
+		selectedCompte = null;
 
 		addMessage("Supression de compte effectuée");
-		return "compte";
+		return "client";
 	}
 
 	public void addMessage(String summary) {

@@ -51,7 +51,7 @@
 					icon="ui-icon-gear" oncomplete="PF('virementDialog2').show()" />
 				<p:menuitem value="Modifier infos" update="form4"
 					icon="ui-icon-pencil" oncomplete="PF('updateDialog').show()" />
-				<p:menuitem value="Delete" update="panelcompte" icon="ui-icon-close"
+				<p:menuitem value="Delete" ajax="false" icon="ui-icon-close"
 					actionListener="#{compteBean.delete}" />
 			</p:contextMenu>
 
@@ -194,7 +194,7 @@
 					<p:inputText id="option" value="#{compteBean.option}"
 						required="true" />
 
-					<p:commandButton type="submit" value="Creer" update="panelcompte"
+					<p:commandButton type="submit" value="Creer" ajax="false"
 						action="#{compteBean.create}" icon="ui-icon-check" />
 
 				</h:panelGrid>

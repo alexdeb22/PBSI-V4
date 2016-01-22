@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import fr.gtm.proxibanquesi.dao.IDaoCompte;
 import fr.gtm.proxibanquesi.domaine.Compte;
@@ -19,6 +20,7 @@ import fr.gtm.proxibanquesi.exceptions.SoldeException;
  *
  */
 @Service("serviceCompte")
+@Transactional
 public class ServiceCompte implements IServiceCompte {
 
 	
