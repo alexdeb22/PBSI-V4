@@ -5,6 +5,10 @@ import org.springframework.stereotype.Repository;
 
 import fr.gtm.proxibanquesi.domaine.Compte;
 
+/**
+ * Interface IDaoCompte qui hérite des méthodes de l'interface JpaRepository
+ *
+ */
 @Repository("daoCompte")
 public interface IDaoCompte extends JpaRepository<Compte, Integer> {
 

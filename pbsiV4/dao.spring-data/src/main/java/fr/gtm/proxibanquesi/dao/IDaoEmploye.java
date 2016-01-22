@@ -5,8 +5,8 @@ import org.springframework.stereotype.Repository;
 
 import fr.gtm.proxibanquesi.domaine.Employe;
 
-/** Spring data Repository pour les employes
- * @author Adminl
+/**
+ * Interface IDaoEmploye qui hérite des méthodes de l'interface JpaRepository
  *
  */
 @Repository("daoEmploye")

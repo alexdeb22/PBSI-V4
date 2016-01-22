@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import fr.gtm.proxibanquesi.domaine.Client;
 
 /**
- * Interface DaoClient. Elle liste les méthodes CRUD d'un client et une méthode qui retourne la liste de tous les clients
+ * Interface IDaoClient qui hérite des méthodes de l'interface JpaRepository
  *
  */
 @Repository("daoClient")

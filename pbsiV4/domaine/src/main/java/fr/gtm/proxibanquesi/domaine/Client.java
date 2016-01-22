@@ -13,10 +13,7 @@ import javax.persistence.SequenceGenerator;
 import org.springframework.stereotype.Component;
 
 /**
- * Classe représentant un client de la banque. Toutes les informations
- * personnelles hormis le numéro d'identification sont de type String.
- * 
- * 
+ * Classe représentant un client de la banque. 
  */
 @Entity
 @Component
@@ -63,17 +60,15 @@ public class Client {
 	private List<Compte> listeComptes;
 	
 
-	// Constructeurs
 	/**
-	 * Constructeur sans argument
+	 * Constructeur de Client sans argument
 	 */
 	public Client() {
 		super();
 	}
 
 	/**
-	 * Constructeur a partir des informations personnelles d'un client.
-	 * 
+	 * Constructeur de Client a partir des informations personnelles d'un client.
 	 * @param nom
 	 * @param prenom
 	 * @param adresse
@@ -93,10 +88,8 @@ public class Client {
 		this.email = email;
 	}
 
-	// Getters & Setters
 	/**
 	 * Getter de la propriété nom
-	 * 
 	 * @return La propriété nom
 	 */
 	public String getNom() {
@@ -105,8 +98,6 @@ public class Client {
 
 	/**
 	 * Setter de la propriété nom
-	 * 
-	 * @return void
 	 */
 	public void setNom(String nom) {
 		this.nom = nom;
@@ -114,7 +105,6 @@ public class Client {
 
 	/**
 	 * Getter de la propriété prenom
-	 * 
 	 * @return La propriété prenom
 	 */
 	public String getPrenom() {
@@ -123,8 +113,6 @@ public class Client {
 
 	/**
 	 * Setter de la propriété prenom
-	 * 
-	 * @return void
 	 */
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
@@ -132,7 +120,6 @@ public class Client {
 
 	/**
 	 * Getter de la propriété adresse
-	 * 
 	 * @return La propriété adresse
 	 */
 	public String getAdresse() {
@@ -141,8 +128,7 @@ public class Client {
 
 	/**
 	 * Setter de la propriété adresse
-	 * 
-	 * @return void
+	 * @param adresse
 	 */
 	public void setAdresse(String adresse) {
 		this.adresse = adresse;
@@ -150,7 +136,6 @@ public class Client {
 
 	/**
 	 * Getter de la propriété code postal
-	 * 
 	 * @return La propriété code postal
 	 */
 	public String getCodePostal() {
@@ -159,8 +144,7 @@ public class Client {
 
 	/**
 	 * Setter de la propriété code postal
-	 * 
-	 * @return void
+	 * @param codePostal
 	 */
 	public void setCodePostal(String codePostal) {
 		this.codePostal = codePostal;
@@ -168,7 +152,6 @@ public class Client {
 
 	/**
 	 * Getter de la propriété ville
-	 * 
 	 * @return La propriété ville
 	 */
 	public String getVille() {
@@ -177,8 +160,7 @@ public class Client {
 
 	/**
 	 * Setter de la propriété ville
-	 * 
-	 * @return void
+	 * @param ville
 	 */
 	public void setVille(String ville) {
 		this.ville = ville;
@@ -186,7 +168,6 @@ public class Client {
 
 	/**
 	 * Getter de la propriété telephone
-	 * 
 	 * @return La propriété telephone
 	 */
 	public String getTelephone() {
@@ -195,8 +176,7 @@ public class Client {
 
 	/**
 	 * Setter de la propriété telephone
-	 * 
-	 * @return void
+	 * @param telephone
 	 */
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
@@ -204,7 +184,6 @@ public class Client {
 
 	/**
 	 * Getter de la propriété id
-	 * 
 	 * @return La propriété id
 	 */
 	public Integer getId() {
@@ -213,8 +192,7 @@ public class Client {
 
 	/**
 	 * Setter de la propriété id
-	 * 
-	 * @return void
+	 * @param id
 	 */
 	public void setId(Integer id) {
 		this.id = id;
@@ -222,7 +200,6 @@ public class Client {
 
 	/**
 	 * Getter de la propriété email
-	 * 
 	 * @return La propriété email
 	 */
 	public String getEmail() {
@@ -231,22 +208,32 @@ public class Client {
 
 	/**
 	 * Setter de la propriété email
-	 * 
-	 * @return void
+	 * @param email
 	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
+	/**
+	 * Getter de la propriété Liste<Compte>
+	 * @return La propriété listeCompte
+	 */
 	public List<Compte> getListeComptes() {
 		return listeComptes;
 	}
 
+	/**
+	 * Setter de la propriété email
+	 * @param listeComptes
+	 */
 	public void setListeComptes(List<Compte> listeComptes) {
 		this.listeComptes = listeComptes;
 	}
 
-	// Affichage
+	/**
+	 * Méthode permettant de retourner un String avec les propriétés de Client
+	 * @return String décrivant le client
+	 */
 	@Override
 	public String toString() {
 		return "Client [nom=" + nom + ", prenom=" + prenom + ", adresse=" + adresse + ", codePostal=" + codePostal

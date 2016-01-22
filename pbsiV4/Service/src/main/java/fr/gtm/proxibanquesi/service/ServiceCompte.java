@@ -19,47 +19,58 @@ import fr.gtm.proxibanquesi.domaine.CompteEpargne;
 @Service("serviceCompte")
 public class ServiceCompte implements IServiceCompte {
 
+	
+	/**
+	 * Interface IDAOCompte injecté par Spring
+	 */
 	@Autowired
 	private IDaoCompte dao;
-
-	/**
-	 * Methode qui retourne un compte à partir de son numéro
-	 * 
-	 * @param Integer
-	 *            numcompte : l'identifiant d'un compte
-	 */
-	public Compte findOne(Integer numcompte) {
-		return dao.findOne(numcompte);
-	}
-
-	/** Methode qui retourne tous les comptes
-	 * @return
-	 */
-	public List<Compte> findAll() {
-		return dao.findAll();
-	}
 	
-
+	/**
+	 * Constructeur de ServiceCompte sans argument
+	 */
+	public ServiceCompte() {
+		super();
+	}
 
 	/**
-	 * Getter de l'attribut IDaoClient
-	 * 
-	 * @return instance du DaoClient
+	 * Getter de l'attribut IDaoCompte
+	 * @return instance du DaoCompte
 	 */
 	public IDaoCompte getDao() {
 		return dao;
 	}
 
 	/**
-	 * Setter de l'attribut IDaoClient
-	 * 
-	 * @param instance
-	 *            du DaoClient
+	 * Setter de l'attribut IDaoCompte
+	 * @param instance du DaoCompte
 	 */
 	public void setDao(IDaoCompte dao) {
 		this.dao = dao;
 	}
 
+	/**
+	 * Methode qui retourne un compte à partir de son numéro
+	 * @param numcompte : l'identifiant d'un compte
+	 * @return Compte : retourne le compte
+	 */
+	public Compte findOne(Integer numcompte) {
+		return dao.findOne(numcompte);
+	}
+
+	/** Methode qui retourne tous les comptes
+	 * @return List<Compte> : retourne une liste de Compte
+	 */
+	public List<Compte> findAll() {
+		return dao.findAll();
+	}
+	
+	/**
+	 * Methode qui effectue une virement compte à compte d'un même client
+	 * @param cDeb : compte à débiter 
+	 * @param cCre : compte à créditer
+	 * @param montant : montant du virement à effectuer
+	 */
 	public void virementIntraClient(Compte cDeb, Compte cCre, double montant) {
 		if (cDeb instanceof CompteEpargne && cDeb.getSolde() >= montant || cDeb instanceof CompteCourant && cDeb.getSolde()+ ((CompteCourant)cDeb).getAutorisationDecouvert() >= montant) {
 			cDeb.setSolde(cDeb.getSolde()-montant);
@@ -72,15 +83,12 @@ public class ServiceCompte implements IServiceCompte {
 		
 	}
 
-	public void createOrUpdate(Compte compte) {
-		dao.save(compte);
-	}
-
-	public void delete(Compte compte) {
-		dao.delete(compte);
-	}
-
-
+	/**
+	 * Methode qui effectue une virement compte à compte d'un client à un autre client
+	 * @param cDeb : compte à débiter 
+	 * @param cCre : compte à créditer
+	 * @param montant : montant du virement à effectuer
+	 */
 	public void virementInterClient(Compte cDeb, Integer numCompteCre, double montant) {
 		Compte cCre = dao.findOne(numCompteCre);
 		if (cDeb instanceof CompteEpargne && cDeb.getSolde() >= montant || cDeb instanceof CompteCourant && cDeb.getSolde()+ ((CompteCourant)cDeb).getAutorisationDecouvert() >= montant) {
@@ -91,6 +99,29 @@ public class ServiceCompte implements IServiceCompte {
 		} else {
 //			throw new exception;
 		}
+	}	
+	
+	/**
+	 * Méthode qui crée un compte en base de données
+	 * @param compte : le compte à créer
+	 */
+	public void createOrUpdate(Compte compte) {
+		dao.save(compte);
 	}
+	
+	/**
+	 * Méthode qui supprime un compte en base de données
+	 * @param compte : le compte à supprimer
+	 */
+	public void delete(Compte compte) {
+		dao.delete(compte);
+	}
+	
+	
+
+	
+
+
+	
 
 }

@@ -16,6 +16,10 @@ import fr.gtm.proxibanquesi.domaine.Compte;
 import fr.gtm.proxibanquesi.domaine.CompteCourant;
 import fr.gtm.proxibanquesi.domaine.CompteEpargne;
 
+/**
+ * Classe TestDaoCompte qui permet de tester les méthodes findOne, testFindAndMdp() de DaoEmploye
+ *
+ */
 @Transactional
 public class TestDaoCompte {
 	

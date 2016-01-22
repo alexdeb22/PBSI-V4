@@ -14,28 +14,24 @@ public class CompteCourant extends Compte {
 	/** Autorisation de découvert */
 	private double autorisationDecouvert = 1000;
 	
-	// Constructeurs
 	/**
-	 * Constructeur par défaut du compte courant
-	 * 
+	 * Constructeur de CompteCourant sans argument
 	 */
 	public CompteCourant() {
 		super();
 	}
+	
 	/**
-	 * Constructeur permettant créer un compte courant avec un solde
-	 * @param double solde : le solde du compte courant à créer
+	 * Constructeur de CompteCourant permettant créer un compte courant avec un solde
+	 * @param solde : le solde du compte courant à créer
 	 */
 	public CompteCourant(double solde) {
 		super();
 		setSolde(solde);
 	}
-	
 
-	// Getters & Setters
 	/**
 	 * Getter de la propriété autorisationDecouvert
-	 * 
 	 * @return La propriété autorisationDecouvert
 	 */
 	public double getAutorisationDecouvert() {
@@ -43,19 +39,16 @@ public class CompteCourant extends Compte {
 	}
 	/**
 	 * Setter de la propriété autorisationDecouvert
-	 * 
-	 * @return void
+	 * @param d
 	 */
-	public void setAutorisationDecouvert(double d) {
-		this.autorisationDecouvert = d;
+	public void setAutorisationDecouvert(double autorisationDecouvert) {
+		this.autorisationDecouvert = autorisationDecouvert;
 	}
 
-	
-	// Affichage
+
 	/**
 	 * Méthode permettant de retourner un String avec les propriétés de l'objet CompteCourant
-	 * 
-	 * @return String décrivant le compte courant
+	 * @return String le string Courant
 	 */
 	@Override
 	public String toString() {

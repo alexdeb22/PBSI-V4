@@ -13,20 +13,28 @@ import fr.gtm.proxibanquesi.domaine.Conseiller;
 import fr.gtm.proxibanquesi.domaine.Employe;
 import fr.gtm.proxibanquesi.domaine.Gerant;
 
+/**
+ * Classe TestDaoEmploye qui permet de tester la méthode testFindAndMdp() de DaoEmploye
+ *
+ */
 @Transactional
 public class TestDaoEmploye {
+	/** Interface IDAOEmploye  */
 	private static IDaoEmploye dao;
+	/** Interface ApplicationContext  */
 	private static ApplicationContext context;
 
+	/**
+	 * Méthode se lancant avant tous les test permettant de charger la définition du contexte 
+	 * à partir d'un fichier XML contenu dans le classpath.
+	 * @throws Exception
+	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		context = new ClassPathXmlApplicationContext("ApplicationContext.xml");
 		dao = (IDaoEmploye) context.getBean("daoEmploye");
 	}
 
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
 	
 //	@Test
 //	public void testCreate() {
@@ -42,6 +50,11 @@ public class TestDaoEmploye {
 //		assertNotNull(dao.findOne(ger.getId()));
 //	}
 	
+	
+	/**
+	 * Méthode de test permettant de vérifier que le gérant, ayant pour login : ger et
+	 * mot de passe : ger, se trouve dans la base de données.
+	 */
 	@Test
 	public void testFindByLogAndMdp() {
 		Employe emp = dao.findByLoginAndMdp("ger", "ger");
