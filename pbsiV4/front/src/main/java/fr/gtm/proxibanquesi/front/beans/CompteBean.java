@@ -18,6 +18,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import fr.gtm.proxibanquesi.domaine.Compte;
+import fr.gtm.proxibanquesi.exceptions.CompteInexistantException;
 import fr.gtm.proxibanquesi.exceptions.SoldeException;
 import fr.gtm.proxibanquesi.service.IServiceCompte;
 
@@ -114,6 +115,8 @@ public class CompteBean implements Serializable {
 			iservCompte.virementInterClient(selectedCompte, idCompteExterneDestination, montant);
 			addMessage("Virement effectué");
 		} catch (SoldeException e) {
+			addMessage(e.getMessage());
+		} catch (CompteInexistantException e) {
 			addMessage(e.getMessage());
 		}
 

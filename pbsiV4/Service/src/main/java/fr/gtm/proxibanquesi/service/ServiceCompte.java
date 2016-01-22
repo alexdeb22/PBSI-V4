@@ -9,6 +9,7 @@ import fr.gtm.proxibanquesi.dao.IDaoCompte;
 import fr.gtm.proxibanquesi.domaine.Compte;
 import fr.gtm.proxibanquesi.domaine.CompteCourant;
 import fr.gtm.proxibanquesi.domaine.CompteEpargne;
+import fr.gtm.proxibanquesi.exceptions.CompteInexistantException;
 import fr.gtm.proxibanquesi.exceptions.SoldeException;
 
 /**
@@ -82,8 +83,9 @@ public class ServiceCompte implements IServiceCompte {
 	}
 
 
-	public void virementInterClient(Compte cDeb, Integer numCompteCre, double montant) throws SoldeException {
+	public void virementInterClient(Compte cDeb, Integer numCompteCre, double montant) throws SoldeException, CompteInexistantException {
 		Compte cCre = dao.findOne(numCompteCre);
+		if (null==cCre) throw new CompteInexistantException();
 		if (cDeb instanceof CompteEpargne && cDeb.getSolde() >= montant || cDeb instanceof CompteCourant && cDeb.getSolde()+ ((CompteCourant)cDeb).getAutorisationDecouvert() >= montant) {
 			cDeb.setSolde(cDeb.getSolde()-montant);
 			cCre.setSolde(cCre.getSolde()+montant);

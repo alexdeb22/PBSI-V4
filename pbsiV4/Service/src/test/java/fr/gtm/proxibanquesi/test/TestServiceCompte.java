@@ -13,6 +13,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import fr.gtm.proxibanquesi.dao.IDaoCompte;
 import fr.gtm.proxibanquesi.domaine.CompteCourant;
+import fr.gtm.proxibanquesi.exceptions.CompteInexistantException;
 import fr.gtm.proxibanquesi.exceptions.SoldeException;
 import fr.gtm.proxibanquesi.service.ServiceClient;
 import fr.gtm.proxibanquesi.service.ServiceCompte;
@@ -98,6 +99,9 @@ public class TestServiceCompte {
 		try {
 			ser2.virementInterClient(ser2.findOne(1), 3, 20);
 		} catch (SoldeException e) {
+			e.getMessage();
+			fail();
+		} catch (CompteInexistantException e) {
 			e.getMessage();
 			fail();
 		}
