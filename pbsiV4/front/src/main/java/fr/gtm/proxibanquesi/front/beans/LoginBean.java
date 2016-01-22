@@ -10,7 +10,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -28,9 +27,6 @@ public class LoginBean {
 	private Employe employe;
 	
 	private Client nouveauClient;
-	
-	@Value("clientBean")
-	private ClientBean clientBean;
 	
 	@Autowired
 	private IServiceEmploye serv;
@@ -85,14 +81,6 @@ public class LoginBean {
 		this.nouveauClient = nouveauClient;
 	}
 
-	public ClientBean getClientBean() {
-		return clientBean;
-	}
-
-	public void setClientBean(ClientBean clientBean) {
-		this.clientBean = clientBean;
-	}
-
 	public String authentification() {
 		System.out.println(employe.getLogin() + " " + employe.getMdp() );
 		if (serv.findByLoginAndMdp(employe.getLogin(), employe.getMdp()) != null) {
@@ -133,21 +121,11 @@ public class LoginBean {
 		System.out.println("nouveau client :" + nouveauClient);
 		((Conseiller) employe).getListeClients().add(nouveauClient);
 		serv.createOrUpdate(employe);
-//		employe = serv.findOne(employe.getId());
+		employe = serv.findOne(employe.getId());
 		addMessage("Ajout client effectué");
 		return "/faces/cons/client.xhtml";
 	}
 	
-	/**
-	 * Methode de supression d'un client en base
-	 * 
-	 * @return une chaine de caratere referencant la page xhtml client (maj)
-	 */
-	public String delete() {
-		((Conseiller) employe).getListeClients().remove(clientBean.getSelectedClient());
-		addMessage("Supression client effectuée");
-		return "client";
-	}
 	
 	public void addMessage(String summary) {
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, null);
