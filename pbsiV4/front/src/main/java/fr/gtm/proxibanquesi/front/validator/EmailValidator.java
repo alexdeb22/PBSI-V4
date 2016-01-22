@@ -16,8 +16,6 @@ import javax.faces.validator.ValidatorException;
 	            FacesMessage message = new FacesMessage();
 	            message.setSeverity(FacesMessage.SEVERITY_ERROR);
 	            message.setSummary("Email invalide  : user@mail.fr");
-//	            message.setDetail("Email invalide");
-//	            context.addMessage("userForm:Email", message);
 	            throw new ValidatorException(message);
 	        }
 	    }
