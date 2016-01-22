@@ -19,6 +19,7 @@ import org.springframework.stereotype.Component;
 import fr.gtm.proxibanquesi.domaine.Client;
 import fr.gtm.proxibanquesi.domaine.Conseiller;
 import fr.gtm.proxibanquesi.service.IServiceClient;
+import fr.gtm.proxibanquesi.service.IServiceEmploye;
 
 /**
  * @author bobi Managed bean de gestion de la vue client Permet de creer un
@@ -40,6 +41,7 @@ public class ClientBean implements Serializable {
 
 	@Autowired
 	private IServiceClient serviceClient;
+	
 
 	/**
 	 * Methode d'initialisation du bean
