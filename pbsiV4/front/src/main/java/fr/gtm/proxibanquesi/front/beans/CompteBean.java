@@ -20,6 +20,7 @@ import org.springframework.stereotype.Component;
 import fr.gtm.proxibanquesi.domaine.Compte;
 import fr.gtm.proxibanquesi.exceptions.CompteInexistantException;
 import fr.gtm.proxibanquesi.exceptions.SoldeException;
+import fr.gtm.proxibanquesi.service.IServiceClient;
 import fr.gtm.proxibanquesi.service.IServiceCompte;
 
 
@@ -40,6 +41,9 @@ public class CompteBean implements Serializable {
 	
 	@Autowired
 	private IServiceCompte iservCompte;
+	
+	@Autowired
+	private IServiceClient iservClient;
 
 	@Value("#{clientBean}")
 	private ClientBean ownerBean;
@@ -128,6 +132,11 @@ public class CompteBean implements Serializable {
 	}
 
 	public String delete() {
+		compteList = ownerBean.getSelectedClient().getListeComptes();
+		compteList.remove(selectedCompte);
+		iservClient.createOrUpdate(ownerBean.getSelectedClient());
+		iservCompte.delete(selectedCompte);
+
 		addMessage("Supression de compte effectuée");
 		return "compte";
 	}
