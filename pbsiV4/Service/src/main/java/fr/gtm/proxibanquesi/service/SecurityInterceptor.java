@@ -15,6 +15,9 @@ import fr.gtm.proxibanquesi.domaine.Compte;
 import fr.gtm.proxibanquesi.domaine.Transaction;
 
 
+/**
+ * Classe d'aspect transversale procédant à l'interception, log et persitence en base de données des virements
+ */
 @Aspect
 public class SecurityInterceptor {
 
@@ -26,10 +29,20 @@ public class SecurityInterceptor {
 		System.out.println("Interceptor cree");
 	}
 
+	/**
+	 * Point de branchement de l'interceptor qui
+	 * intercepte toutes les méthodes du ServiceCompte.
+	 *et log la transaction pour les deux méthoes de virement. 
+	 */
 	@Pointcut("execution(* fr.gtm.proxibanquesi.service.ServiceCompte.*(. .))")
 	public void secure() {
 	}
 
+	/**
+	 * Méthode appelée au lancement du virement récupérant les arguments transmit au ServiceCompte et
+	 * persistence d'une nouvelle entrée transaction
+	 * @param joinpoint
+	 */
 	@Before("secure()")
 	public void logAvant(JoinPoint jp) {
 		System.out.println("Avant methode");

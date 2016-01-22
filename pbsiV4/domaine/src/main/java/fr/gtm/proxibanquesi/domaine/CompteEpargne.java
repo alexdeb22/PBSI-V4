@@ -10,31 +10,26 @@ import javax.persistence.Entity;
 @DiscriminatorValue("EPARGNE")
 public class CompteEpargne extends Compte {
 
-	// Propriétés
 	/** Taux de rémunération du compte épargne */
 	private double tauxRemuneration = 0.03;
 	
-	// Constructeurs
 	/**
-	 * Constructeur par défaut du compte épargne
-	 * 
+	 * Constructeur de CompteEpargne sans argument
 	 */
 	public CompteEpargne() {
 		super();
 	}
 	/**
 	 * Constructeur permettant créer un compte épargne avec un solde
-	 * @param double solde : le solde du compte épargne à créer
+	 * @param solde : le solde du compte épargne à créer
 	 */
 	public CompteEpargne(double solde) {
 		super();
 		setSolde(solde);
 	}
 
-	// Getters & Setters
 	/**
 	 * Getter de la propriété tauxRemuneration
-	 * 
 	 * @return La propriété tauxRemuneration
 	 */
 	public double getTauxRemuneration() {
@@ -42,19 +37,16 @@ public class CompteEpargne extends Compte {
 	}
 	/**
 	 * Setter de la propriété tauxRemuneration
-	 * 
-	 * @return void
+	 * @param tauxRemuneration
 	 */
 	public void setTauxRemuneration(double tauxRemuneration) {
 		this.tauxRemuneration = tauxRemuneration;
 	}
 	
 
-	// Affichage
 	/**
 	 * Méthode permettant de retourner un String avec les propriétés de l'objet CompteEpargne
-	 * 
-	 * @return String décrivant le compte épargne
+	 * @return String le string Epargne
 	 */
 	@Override
 	public String toString() {

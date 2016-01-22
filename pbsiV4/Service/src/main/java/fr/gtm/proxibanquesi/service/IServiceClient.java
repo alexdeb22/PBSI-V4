@@ -19,13 +19,13 @@ public interface IServiceClient {
 
 	
 	/**
-	 * Méthode qui crée ou modifie un client en base
+	 * Méthode qui crée ou modifie un client en base de données
 	 * @param client : le Client à créer ou modifier
 	 */
 	public void createOrUpdate(Client client);
 	
 	/**
-	 * Méthode qui supprime un client en base
+	 * Méthode qui supprime un client en base de données
 	 * @param client : le Client à supprimer
 	 */
 	public void delete(Client client);

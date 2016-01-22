@@ -22,18 +22,12 @@ public class ServiceClient implements IServiceClient {
 	@Autowired
 	private IDaoClient dao;
 
+	/**
+	 * Constructeur de ServiceClient sans argument
+	 */
 	public ServiceClient() {
 		super();
 	}
-
-
-	/**
-	 * Methode qui retourne la liste de tous les clients
-	 */
-	public List<Client> findAll() {
-		return dao.findAll();
-	}
-
 
 	/**
 	 * Getter de l'attribut IDaoClient
@@ -52,7 +46,16 @@ public class ServiceClient implements IServiceClient {
 	}
 
 	/**
-	 * Méthode qui crée ou modifie un client en base
+	 * Methode qui retourne la liste de tous les clients
+	 * @return List<Client> : retourne une liste de Clients
+	 */
+	public List<Client> findAll() {
+		return dao.findAll();
+	}
+
+
+	/**
+	 * Méthode qui crée ou modifie un client en base  de données
 	 * @param client : le Client à créer ou modifier
 	 */
 	public void createOrUpdate(Client client) {
@@ -60,7 +63,7 @@ public class ServiceClient implements IServiceClient {
 	}
 
 	/**
-	 * Méthode qui supprime un client en base
+	 * Méthode qui supprime un client en base de données
 	 * @param client : le Client à supprimer
 	 */
 	public void delete(Client client) {

@@ -8,9 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 
-/** Classe representant un conseiller de l'agence.
- * @author Adminl
- *
+/** 
+ * Classe representant un conseiller de l'agence, héritant de la classe abstraite Employe.
  */
 @Entity
 @DiscriminatorValue("CONSEILLER")
@@ -23,7 +22,7 @@ public class Conseiller extends Employe {
 	private List<Client> listeClients;
 
 	/**
-	 * Constructeur par defaut.
+	 * Constructeur de Conseiller sans argument
 	 */
 	public Conseiller() {
 	}
@@ -38,10 +37,18 @@ public class Conseiller extends Employe {
 		this.setPrenom(prenom);
 	}
 
+	/**
+	 * Getter de la propriété listeClient
+	 * @return La propriété listeClient
+	 */
 	public List<Client> getListeClients() {
 		return listeClients;
 	}
 
+	/**
+	 * Setter de la propriété listeClient
+	 * @param listeClient
+	 */
 	public void setListeClients(List<Client> listeClients) {
 		this.listeClients = listeClients;
 	}
