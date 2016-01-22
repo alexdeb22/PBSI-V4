@@ -29,16 +29,19 @@ public interface IServiceCompte {
 	 * @param cDeb : compte à débiter 
 	 * @param cCre : compte à créditer
 	 * @param montant : montant du virement à effectuer
+	 * @throws SoldeException 
 	 */
-	public void virementIntraClient(Compte cDeb, Compte cCre, double montant);
+	public void virementIntraClient(Compte cDeb, Compte cCre, double montant) throws SoldeException;
 	
 	/**
 	 * Methode qui effectue une virement compte à compte d'un client à un autre client
 	 * @param cDeb : compte à débiter 
 	 * @param cCre : compte à créditer
 	 * @param montant : montant du virement à effectuer
+	 * @throws CompteInexistantException 
+	 * @throws SoldeException 
 	 */
-	public void virementInterClient(Compte cDeb, Integer numCompteCre, double montant);
+	public void virementInterClient(Compte cDeb, Integer numCompteCre, double montant) throws SoldeException, CompteInexistantException;
 	
 	
 	/**
