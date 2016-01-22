@@ -23,16 +23,19 @@ import fr.gtm.proxibanquesi.service.IServiceEmploye;
 @Scope
 @Component
 public class LoginBean {
-	
+	/** employé */
 	private Employe employe;
-	
+	/** nouveau client */
 	private Client nouveauClient;
 	
+	/**
+	 * Interface IServiceEmploye injecté par Spring
+	 */
 	@Autowired
 	private IServiceEmploye serv;
 	
 	/**
-	 * Methode d'initialisation du bean
+	 * Methode appelée avant l'initialisation du bean 
 	 */
 	@PostConstruct
 	public void initBean() {
@@ -41,46 +44,72 @@ public class LoginBean {
 		nouveauClient = new Client();
 		System.out.println("Employe : " + employe);
 	}
-	
+	/**
+	 * Methode appelée avant la destruction du bean du bean 
+	 */
 	@PreDestroy
 	public void finBean() {
 		System.out.println("Destruction bean login");
 	}
 	
 	/**
-	 * Constructeur par default du bean
+	 * Constructeur de LoginBean sans argument
 	 */
 	public LoginBean() {
 		super();
 	}
 
+	/**
+	 * getter de l'attribut employe
+	 * @return l'instance employe
+	 */
 	public Employe getEmploye() {
-//		if(employe.getId() != null){
-//			employe = serv.findOne(employe.getId());
-//		}
 		return employe;
 	}
 
+	/**
+	 * setter de l'attribut employe
+	 * @param employe
+	 */
 	public void setEmploye(Employe employe) {
 		this.employe = employe;
 	}
-	
+	/**
+	 * getter de l'attribut IServiceEmploye
+	 * @return l'instance IServiceEmploye
+	 */
 	public IServiceEmploye getServ() {
 		return serv;
 	}
 
+	/**
+	 * setter de l'attribut IServiceEmploye
+	 * @param IServiceEmploye
+	 */
 	public void setServ(IServiceEmploye serv) {
 		this.serv = serv;
 	}
 
+	/**
+	 * getter de l'attribut nouveauClient
+	 * @return l'instance nouveauClient
+	 */
 	public Client getNouveauClient() {
 		return nouveauClient;
 	}
 
+	/**
+	 * setter de l'attribut nouveauClient
+	 * @param nouveauClient
+	 */
 	public void setNouveauClient(Client nouveauClient) {
 		this.nouveauClient = nouveauClient;
 	}
 
+	/**
+	 * Méthode qui permet l'authentification d'un employé, interrogation de la base de données
+	 * @return une chaine de caratere referencant une page xhtml /faces/accueil.xhtml
+	 */
 	public String authentification() {
 		System.out.println(employe.getLogin() + " " + employe.getMdp() );
 		if (serv.findByLoginAndMdp(employe.getLogin(), employe.getMdp()) != null) {
@@ -100,6 +129,10 @@ public class LoginBean {
 		return "/faces/erreur.xhtml";
 	}
 	
+	/**
+	 * Méthode qui permet de se déconnecter à sa session
+	 * @return une chaine de caratere referencant une page xhtml /faces/accueil.xhtml
+	 */
 	public String logout() {
 		employe = new Conseiller();
 		try {
@@ -112,8 +145,7 @@ public class LoginBean {
 	}
 	
 	/**
-	 * Methode de creation d'un nouveau client
-	 * 
+	 * Methode de creation d'un nouveau client 
 	 * @return une chaine de caratere referencant une page xhtml client
 	 */
 	public String create() {
@@ -126,7 +158,10 @@ public class LoginBean {
 		return "/faces/cons/client.xhtml";
 	}
 	
-	
+	/**
+	 * Methode d'affichage de notifications
+	 *  @param summary : message a émettre
+	 */
 	public void addMessage(String summary) {
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, null);
 		FacesContext.getCurrentInstance().addMessage(null, message);
